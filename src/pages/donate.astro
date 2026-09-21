@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+import site from '../data/site.json';
+
+// Set "donateUrl" in src/data/site.json to the mission's donation page. Until then the page says
+// online giving is not available, instead of showing a form that cannot take a payment.
+const donateUrl = site.donateUrl.trim();
+---
+
+<BaseLayout
+  title="Donate"
+  description="Help fund the educational efforts and advocacy work of America Back to God Mission."
+  cta={false}
+>
+  <PageHero title="Donate" eyebrow="Support our cause">
+    <p>Help fund our educational efforts and advocacy work.</p>
+  </PageHero>
+
+  <section class="section" aria-labelledby="give-title">
+    <div class="container container--narrow">
+      <SectionHeading number="01" eyebrow="Support our cause" id="give-title" title="Support our work" />
+      {donateUrl ? (
+        <>
+          <p class="lead">Your gift helps fund our educational efforts and advocacy work.</p>
+          <p>
+            <a class="btn btn--primary" href={donateUrl} target="_blank" rel="noopener noreferrer">
+              Donate now<span class="sr-only"> (opens in a new tab)</span>
+              <Icon name="external-link" />
+            </a>
+          </p>
+        </>
+      ) : (
+        <div class="notice">
+          <p><strong>Online giving is not available yet.</strong></p>
+          <p>
+            We are setting up a way to give online. In the meantime, please contact us to ask how to support the mission.
+          </p>
+          <ul class="contact-list">
+            <li>
+              <Icon name="phone" />
+              <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+            </li>
+            <li>
+              <Icon name="mail" />
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </li>
+          </ul>
+        </div>
+      )}
+      <p class="other-ways">
+        You can also support the mission by <a href="/becoming-a-member/">becoming a member</a>, <a href="/volunteering/">volunteering</a>, or sharing our message with your network.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .contact-list :global(.icon) {
+    color: var(--navy-600);
+  }
+  .other-ways {
+    margin-top: var(--space-6);
+    color: var(--text-muted);
+  }
+</style>

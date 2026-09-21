@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FormEmbed from '../components/FormEmbed.astro';
+import Icon from '../components/Icon.astro';
+import site from '../data/site.json';
+---
+
+<BaseLayout
+  title="Contact Us"
+  description="Contact America Back to God Mission by phone at 781-219-7983 or by email. We are here to help and answer any questions you may have."
+  cta={false}
+>
+  <PageHero title="Contact Us" eyebrow="Connect with us">
+    <p>We're here to help and answer any questions you may have.</p>
+  </PageHero>
+
+  <section class="section" aria-labelledby="contact-title">
+    <div class="container split split--wide-left">
+      <div>
+        <SectionHeading number="01" eyebrow="Send a message" id="contact-title" title="Get in touch" />
+        <FormEmbed form="contact" fallbackIntro="Our online contact form is being connected. Until then, please call or email us and we will get back to you." />
+      </div>
+
+      <aside class="details" aria-label="Contact details">
+        <h2>Reach us directly</h2>
+        <ul class="details__list">
+          <li>
+            <Icon name="phone" />
+            <div>
+              <span class="details__label">Phone</span>
+              <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+            </div>
+          </li>
+          <li>
+            <Icon name="mail" />
+            <div>
+              <span class="details__label">Email</span>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </div>
+          </li>
+        </ul>
+        <h3>Follow us</h3>
+        <ul class="details__social">
+          <li>
+            <a href={site.social.facebook} target="_blank" rel="noopener noreferrer">
+              <Icon name="facebook" /> Facebook<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+          <li>
+            <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">
+              <Icon name="instagram" /> Instagram, {site.instagramHandle}<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+          <li>
+            <a href={site.social.youtube} target="_blank" rel="noopener noreferrer">
+              <Icon name="youtube" /> YouTube<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .details {
+    padding: var(--space-6);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--red-600);
+    border-radius: var(--radius);
+  }
+  .details h2 {
+    font-size: var(--step-2);
+  }
+  .details h3 {
+    margin-top: var(--space-6);
+    font-size: var(--step-1);
+  }
+  .details ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .details__list li {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  .details__list :global(.icon) {
+    margin-top: 0.25em;
+    color: var(--navy-600);
+  }
+  .details__label {
+    display: block;
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .details__social li {
+    margin-bottom: var(--space-2);
+  }
+  .details__social a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-weight: 600;
+  }
+</style>

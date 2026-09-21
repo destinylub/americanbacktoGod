@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FormEmbed from '../components/FormEmbed.astro';
+---
+
+<BaseLayout
+  title="Becoming a Member"
+  description="Join America Back to God Mission and actively participate in our programs. Members receive monthly emails with updates on the best way to pray."
+  cta={false}
+>
+  <PageHero title="Becoming a Member" eyebrow="Get involved">
+    <p>Join our organization and actively participate in our programs.</p>
+  </PageHero>
+
+  <section class="section" aria-labelledby="member-title">
+    <div class="container container--narrow">
+      <SectionHeading number="01" eyebrow="Membership" id="member-title" title="Join the mission" />
+      <p class="lead">We appreciate your support and will send monthly emails with updates on the best way to pray.</p>
+      <FormEmbed form="member" fallbackIntro="Our online membership form is being connected. Until then, please call or email us to become a member." />
+    </div>
+  </section>
+</BaseLayout>
