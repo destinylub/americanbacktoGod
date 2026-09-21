@@ -1,0 +1,177 @@
+{
+  "logo": {
+    "src": "2023/09/America-Back-to-God.png",
+    "alt": "America Back to God Mission logo",
+    "widths": [
+      96,
+      192,
+      409
+    ],
+    "mask": "circle"
+  },
+  "founder-veronica-magembe": {
+    "src": "2023/09/345459524_208236478650978_8498930597951652364_n.jpg",
+    "alt": "Veronica Magembe, founder and executive director of America Back to God Mission",
+    "widths": [
+      400,
+      800,
+      958
+    ]
+  },
+  "flyer-2024-prayer-conference": {
+    "src": "2024/09/IMG-20240926-WA0024.jpg",
+    "alt": "Flyer for the 8th Annual Prayer Conference, October 24 to 26, 2024, 6:00 PM to 9:00 PM, at 90 Herndon Lane, Canton, GA 30114. Free parking and free event."
+  },
+  "flyer-2023-prayer-conference": {
+    "src": "2023/09/381017232_2589365617893824_2891426274961025634_n.jpg",
+    "alt": "Flyer for the 7th Annual America Back to God Prayer Conference, November 9 to 11, 2023, 6PM to 9PM, at 1075 Holcomb Bridge Rd, Roswell, GA 30076."
+  },
+  "flyer-monthly-prayer-meeting": {
+    "src": "2023/09/WhatsApp-Image-2023-09-25-at-07.58.36.jpg",
+    "alt": "Flyer for the monthly prayer meeting on the first Friday of every month. Dinner 6:00 to 7:00 PM, worship and prayer 7:00 to 8:30 PM. Free food, free prayer, free admission, at 380 Grayson Way, Alpharetta, GA 30004."
+  },
+  "conference-woman-in-magenta-jacket": {
+    "src": "2024/09/IMG-20240926-WA0007.jpg",
+    "alt": "A woman in a magenta jacket and striped skirt stands with her hands clasped in a conference room."
+  },
+  "conference-foot-washing-prayer": {
+    "src": "2024/09/IMG-20240926-WA0008.jpg",
+    "alt": "Attendees kneel on the floor around a basin and towels while a woman beside them raises her hands in prayer."
+  },
+  "conference-two-women-embracing": {
+    "src": "2024/09/IMG-20240926-WA0009.jpg",
+    "alt": "Two women share a long embrace while other attendees sit nearby."
+  },
+  "conference-three-women-seated": {
+    "src": "2024/09/IMG-20240926-WA0010.jpg",
+    "alt": "Three women seated in the audience, smiling, in red, yellow and pink outfits."
+  },
+  "conference-speaker-beside-flag": {
+    "src": "2024/09/IMG-20240926-WA0011.jpg",
+    "alt": "A woman speaks into a microphone on stage beside an American flag and a lectern, with an America Back to God banner behind her."
+  },
+  "conference-worship-team-on-stage": {
+    "src": "2024/09/IMG-20240926-WA0012.jpg",
+    "alt": "A worship team sings on a small stage with a keyboard player behind them, in front of white curtains."
+  },
+  "conference-man-with-raised-arm": {
+    "src": "2024/09/IMG-20240926-WA0013.jpg",
+    "alt": "A man in a tan shirt raises one arm in worship while others stand and pray behind him."
+  },
+  "conference-embrace-at-podium": {
+    "src": "2024/09/IMG-20240926-WA0014.jpg",
+    "alt": "Two people embrace at the podium while a woman sings into a microphone beside an America Back to God banner."
+  },
+  "conference-group-praying-with-basin": {
+    "src": "2024/09/IMG-20240926-WA0015.jpg",
+    "alt": "A group kneels and stands around a basin and a burlap cloth, praying together."
+  },
+  "conference-attendees-standing-in-prayer": {
+    "src": "2024/09/IMG-20240926-WA0016.jpg",
+    "alt": "Attendees stand together in a conference room, some with their hands lifted in prayer."
+  },
+  "conference-kneeling-prayer": {
+    "src": "2024/09/IMG-20240926-WA0017.jpg",
+    "alt": "A man kneels in prayer in front of two seated women while a third woman stands beside them."
+  },
+  "conference-prayer-at-lectern": {
+    "src": "2024/09/IMG-20240926-WA0018.jpg",
+    "alt": "A woman prays into a microphone at a lectern beside a flag while a man is prayed for in a chair and another man bows on the floor."
+  },
+  "conference-attendees-praying-together": {
+    "src": "2024/09/IMG-20240926-WA0019.jpg",
+    "alt": "Attendees gather in the middle of the room, standing and praying with one another."
+  },
+  "conference-preacher-under-banner": {
+    "src": "2024/09/IMG-20240926-WA0020.jpg",
+    "alt": "A man speaks on stage under an America Back to God banner, with an American flag beside the stage."
+  },
+  "conference-welcome-table": {
+    "src": "2024/09/IMG-20240926-WA0021.jpg",
+    "alt": "A woman in a pink jacket sits at a table with small American flags and sign-in sheets."
+  },
+  "conference-choir-in-red": {
+    "src": "2024/09/IMG-20240926-WA0022.jpg",
+    "alt": "Five women in red and white sing together with microphones, with a keyboard player behind them."
+  },
+  "conference-prayer-on-stage": {
+    "src": "2024/09/IMG-20240926-WA0023.jpg",
+    "alt": "A woman prays over a man seated in a chair on stage while another woman sings at a lectern with an American flag behind her."
+  },
+  "conference-speaker-in-navy-suit": {
+    "src": "2024/09/WhatsApp-Image-2024-09-26-at-20.46.56_d43cb39f.jpg",
+    "alt": "A woman in a navy suit speaks into a microphone in front of the America Back to God banner."
+  },
+  "speaker-in-coral-dress": {
+    "src": "2023/10/WhatsApp-Image-2023-10-06-at-19.13.19_83188283.jpg",
+    "alt": "A woman in a coral dress speaks into a microphone in front of a white and red backdrop."
+  },
+  "worship-dance-in-white-robe": {
+    "src": "2023/09/DSC_0299.jpeg",
+    "alt": "A woman in a white robe with a gold sash performs a worship dance with a flowing garment on stage."
+  },
+  "woman-speaking-in-white-vest": {
+    "src": "2023/09/DSC_0294.jpeg",
+    "alt": "A woman in a white vest with striped sleeves speaks into a microphone in front of white and red drapes."
+  },
+  "woman-singing-under-banner": {
+    "src": "2023/09/DSC_0295.jpg",
+    "alt": "A woman in white sings at a glass lectern under an America Back to God banner citing 2 Chronicles 7:14."
+  },
+  "woman-speaking-under-banner": {
+    "src": "2023/09/DSC_0296.jpg",
+    "alt": "A woman in a white blouse speaks into a microphone beneath the America Back to God banner."
+  },
+  "man-speaking-under-banner": {
+    "src": "2023/09/DSC_0297.jpg",
+    "alt": "A man in a dark jacket speaks into a microphone beneath the America Back to God banner."
+  },
+  "worship-dance-with-gold-belt": {
+    "src": "2023/09/DSC_0300.jpg",
+    "alt": "A woman in a lavender robe with a gold belt dances with a sheer veil at the front of the stage."
+  },
+  "worship-dance-arms-outstretched": {
+    "src": "2023/09/DSC_0303.jpg",
+    "alt": "A woman in a satin robe worships with her arms outstretched."
+  },
+  "stage-gathering-under-banner": {
+    "src": "2023/09/DSC_0312.jpg",
+    "alt": "Several people stand at the front of the stage under the banner, one with a raised hand, with a camera in the foreground."
+  },
+  "speaker-with-flag-screen": {
+    "src": "2023/09/DSC_0326.jpg",
+    "alt": "A man speaks into a microphone in front of a screen showing an American flag."
+  },
+  "women-singing-on-stage": {
+    "src": "2023/09/DSC_0344.jpg",
+    "alt": "Women sing into microphones at the front of the stage against a white backdrop with red drapes."
+  },
+  "choir-leader-in-floral-dress": {
+    "src": "2023/09/IMG-20230923-WA0001.jpg",
+    "alt": "A woman in a floral dress sings at a lectern while a choir in yellow tops stands behind her."
+  },
+  "choir-in-yellow-tops": {
+    "src": "2023/09/IMG-20230923-WA0002.jpg",
+    "alt": "A choir in yellow tops and black trousers sings on stage beside a drum kit."
+  },
+  "choir-in-yellow-tops-wide": {
+    "src": "2023/09/IMG-20230923-WA0003.jpg",
+    "alt": "The choir in yellow tops sings in a line across the stage in front of gold curtains."
+  },
+  "man-preaching-with-choir": {
+    "src": "2023/09/IMG-20230923-WA0004.jpg",
+    "alt": "A man in a dark suit speaks into a microphone with the choir in yellow tops standing behind him."
+  },
+  "woman-in-floral-dress-smiling": {
+    "src": "2023/09/IMG-20230923-WA0005.jpg",
+    "alt": "A woman in a floral dress smiles as she speaks into a microphone."
+  },
+  "congregation-with-raised-hands": {
+    "src": "2023/09/IMG-20230923-WA0006.jpg",
+    "alt": "Congregants worship with raised hands while a drummer plays in the foreground."
+  },
+  "speaker-in-white-jacket": {
+    "src": "2023/09/IMG-20230923-WA0007.jpg",
+    "alt": "A woman in a white jacket speaks in front of a red, white and blue banner."
+  }
+}
