@@ -1,0 +1,93 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import site from '../data/site.json';
+---
+
+<LegalLayout
+  title="Terms & Conditions"
+  description="The terms that apply when you use the America Back to God Mission website."
+>
+  <p>
+    These Terms &amp; Conditions ("Terms") apply to your use of this website (the "Site"), operated by {site.name} (the
+    "Mission," "we," or "us"). By using the Site you agree to these Terms. If you do not agree, please do not use the
+    Site.
+  </p>
+
+  <h2>1. Use of the Site</h2>
+  <p>You agree to use the Site only for lawful purposes. You agree not to:</p>
+  <ul>
+    <li>Interfere with or disrupt the Site or the services it depends on.</li>
+    <li>Attempt to gain unauthorized access to the Site or its systems.</li>
+    <li>Use the Site's forms to send spam, false information, or content that is harmful or unlawful.</li>
+    <li>Pretend to be another person or organization.</li>
+  </ul>
+
+  <h2>2. Intellectual property</h2>
+  <p>
+    The text, logo, flyers, and photographs on the Site, including photographs from our events, belong to the Mission or
+    are used with permission. You may view the Site and share links to it, and you may share our posts on social media.
+    You may not copy, reproduce, or distribute our content for other purposes without our written permission.
+  </p>
+  <p>
+    Scripture quotations from the New King James Version&reg; are copyright &copy; 1982 by Thomas Nelson and used by
+    permission. All rights reserved. Other names and marks belong to their owners.
+  </p>
+
+  <h2>3. Donations and refunds</h2>
+  <p>
+    Online giving is not currently available on the Site. Donations are voluntary and support the Mission's educational
+    and advocacy work. If online giving is added, payments will be handled by a third-party processor under its own
+    terms. Donations are generally non-refundable. If you believe a gift was made in error, contact us promptly and we
+    will review it.
+  </p>
+  <p>
+    We make no statement about whether a gift is tax-deductible. Please speak with your own tax adviser.
+  </p>
+
+  <h2>4. Information you submit</h2>
+  <p>
+    When you send us information through the Site's forms, you confirm that it is accurate and that you have the right
+    to share it. You allow us to use it to respond to you and to run the programs you ask to join, as described in our
+    <a href="/privacy-policy/">Privacy Policy</a>. We will not publish what you submit without your permission.
+  </p>
+
+  <h2>5. Third-party links and services</h2>
+  <p>
+    The Site links to and embeds services we do not control, including Google Forms, Facebook, Instagram, and YouTube. We
+    are not responsible for their content, availability, or practices. Your use of them is governed by their own terms.
+  </p>
+
+  <h2>6. Disclaimers</h2>
+  <p>
+    The Site and its content are provided "as is" and "as available," without warranties of any kind, to the fullest
+    extent permitted by law. Event dates, times, and locations may change, so please confirm details with us before you
+    travel. Views expressed by speakers and guests at our events are their own. Nothing on the Site is legal, medical,
+    financial, or other professional advice.
+  </p>
+
+  <h2>7. Limitation of liability</h2>
+  <p>
+    To the fullest extent permitted by law, the Mission and its officers, volunteers, and representatives are not liable
+    for any indirect, incidental, special, or consequential damages arising from your use of the Site, or for any loss
+    caused by content or services from third parties.
+  </p>
+
+  <h2>8. Governing law</h2>
+  <p>
+    These Terms are governed by the laws of the State of Georgia, United States, without regard to its conflict-of-law
+    rules. Any dispute will be brought in the state or federal courts located in Georgia.
+  </p>
+
+  <h2>9. Changes to these Terms</h2>
+  <p>
+    We may update these Terms from time to time. The "Last updated" date at the top of this page shows when they last
+    changed. Continuing to use the Site after a change means you accept the updated Terms.
+  </p>
+
+  <h2>10. Contact us</h2>
+  <p>
+    Questions about these Terms:<br />
+    Email: <a href={`mailto:${site.email}`}>{site.email}</a><br />
+    Phone: <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+  </p>
+</LegalLayout>

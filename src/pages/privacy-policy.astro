@@ -1,0 +1,119 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import site from '../data/site.json';
+---
+
+<LegalLayout
+  title="Privacy Policy"
+  description="How America Back to God Mission collects, uses and protects information when you use this website."
+>
+  <p>
+    This Privacy Policy explains how {site.name} (the "Mission," "we," or "us") collects, uses, and shares information
+    when you visit this website (the "Site"), contact us, or sign up as a member or volunteer.
+  </p>
+
+  <h2>1. Information we collect</h2>
+  <h3>Information you give us</h3>
+  <p>
+    When you contact us, become a member, or volunteer, you may give us your name, email address, phone number, and the
+    message or details you choose to include. Volunteer forms may ask for additional details such as your address or
+    availability. These forms are provided through Google Forms. If you call or email us directly, we receive the
+    information you share in that conversation.
+  </p>
+  <h3>Donation-related information</h3>
+  <p>
+    Online giving is not currently available on the Site. If we add it, donations will be handled by a third-party
+    payment processor. The processor collects your payment details directly, and we will not receive or store your full
+    card number. We may receive limited information such as your name, email address, and the amount of your gift.
+  </p>
+  <h3>Information collected automatically</h3>
+  <p>
+    Our hosting provider (Vercel) may process technical information such as your IP address, browser type, the pages you
+    request, and the time of your visit in server logs. This is used to deliver, secure, and troubleshoot the Site. We do
+    not currently run analytics or advertising trackers on the Site. If we add basic analytics in the future, we will
+    update this policy first.
+  </p>
+
+  <h2>2. How we use information</h2>
+  <ul>
+    <li>To respond to your questions and messages.</li>
+    <li>To process membership and volunteer requests.</li>
+    <li>To send members monthly emails with updates on the best way to pray, and information about our events.</li>
+    <li>To operate, secure, and improve the Site.</li>
+    <li>To meet legal obligations.</li>
+  </ul>
+  <p>We do not sell your personal information, and we do not use it for third-party advertising.</p>
+
+  <h2>3. Cookies</h2>
+  <p>
+    The Site itself does not set cookies for tracking or advertising. Embedded content from other services, such as a
+    Google Form, may set its own cookies when you load or use it. We do not control those cookies. You can block or
+    delete cookies in your browser settings, though some embedded content may not work as expected.
+  </p>
+
+  <h2>4. Third-party services</h2>
+  <p>We rely on the following services, each with its own privacy practices:</p>
+  <ul>
+    <li>
+      <strong>Google Forms</strong> collects form submissions on our behalf. See
+      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.
+    </li>
+    <li><strong>Vercel</strong> hosts the Site.</li>
+    <li>
+      <strong>Facebook, Instagram, and YouTube</strong> are linked from the Site. When you follow those links you leave
+      the Site and their policies apply.
+    </li>
+    <li><strong>A payment processor</strong> will be named here if and when online giving is added.</li>
+  </ul>
+
+  <h2>5. How we share information</h2>
+  <p>
+    We share information only with service providers that help us run the Site and our programs, when the law requires
+    it, or with your consent. We do not sell or rent your information.
+  </p>
+
+  <h2>6. How long we keep information</h2>
+  <p>
+    We keep messages and form responses for as long as we need them to respond to you and to run the programs you asked
+    to join. For example, we keep a member's email address until they unsubscribe or ask us to delete it. When
+    information is no longer needed, we delete it or remove details that identify you. Server logs are kept by our
+    hosting provider under its own retention schedule.
+  </p>
+
+  <h2>7. Children's privacy</h2>
+  <p>
+    The Site is not directed to children under 13, and we do not knowingly collect personal information from them. If
+    you believe a child has given us personal information, please contact us and we will delete it.
+  </p>
+
+  <h2>8. Your choices and rights</h2>
+  <p>You may contact us at any time to:</p>
+  <ul>
+    <li>Ask what personal information we hold about you.</li>
+    <li>Ask us to correct or delete your information.</li>
+    <li>Stop receiving emails from us. Every email can be answered with a request to unsubscribe.</li>
+  </ul>
+  <p>
+    Depending on where you live, you may have additional rights under your state's law. Contact us and we will respond
+    as soon as we reasonably can.
+  </p>
+
+  <h2>9. Security</h2>
+  <p>
+    We take reasonable steps to protect the information we hold. No method of transmission or storage is completely
+    secure, so we cannot guarantee absolute security.
+  </p>
+
+  <h2>10. Changes to this policy</h2>
+  <p>
+    We may update this policy from time to time. The "Last updated" date at the top of this page shows when it last
+    changed.
+  </p>
+
+  <h2>11. Contact us</h2>
+  <p>
+    Questions about this policy or your information:<br />
+    Email: <a href={`mailto:${site.email}`}>{site.email}</a><br />
+    Phone: <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+  </p>
+</LegalLayout>

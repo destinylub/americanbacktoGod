@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you were looking for could not be found."
+  noindex
+  cta={false}
+>
+  <PageHero title="This page could not be found" eyebrow="Error 404">
+    <p>The link may be out of date, or the address may have been typed differently. Here is where you can go next.</p>
+  </PageHero>
+
+  <section class="section" aria-label="Where to go next">
+    <div class="container container--narrow">
+      <ul class="links">
+        <li><a class="btn btn--navy" href="/">Go to the home page <Icon name="arrow-right" /></a></li>
+        <li><a class="btn btn--outline" href="/events/">See events</a></li>
+        <li><a class="btn btn--outline" href="/about-us/">About us</a></li>
+        <li><a class="btn btn--outline" href="/contact-us/">Contact us</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>
