@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import EventCard from '../../components/EventCard.astro';
+import { getPast, getUpcoming } from '../../lib/events';
+
+// Sorted by date at build time. Add or edit events in src/data/events.json.
+const upcoming = getUpcoming();
+const past = getPast();
+---
+
+<BaseLayout
+  title="Events"
+  description="Upcoming and past events from America Back to God Mission: the monthly prayer meeting on the first Friday of every month and our annual prayer conferences."
+>
+  <PageHero title="Events" eyebrow="Gather with us">
+    <p>Our monthly prayer meeting and annual prayer conferences.</p>
+  </PageHero>
+
+  <section class="section" aria-labelledby="upcoming-title">
+    <div class="container">
+      <SectionHeading number="01" eyebrow="Coming up" id="upcoming-title" title="Upcoming events" />
+      {upcoming.length > 0 ? (
+        <div class="event-list">
+          {upcoming.map((o) => <EventCard occurrence={o} status="upcoming" />)}
+        </div>
+      ) : (
+        <p class="notice">No upcoming events are scheduled right now. Please check back soon, or contact us to ask what is planned.</p>
+      )}
+    </div>
+  </section>
+
+  {past.length > 0 && (
+    <section class="section section--paper-deep" aria-labelledby="past-title">
+      <div class="container">
+        <SectionHeading number="02" eyebrow="Looking back" id="past-title" title="Past events" />
+        <div class="event-list event-list--two">
+          {past.map((o) => <EventCard occurrence={o} status="past" />)}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .event-list {
+    display: grid;
+    gap: var(--space-5);
+  }
+  @media (min-width: 64rem) {
+    .event-list--two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

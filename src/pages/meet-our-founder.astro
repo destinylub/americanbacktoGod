@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Picture from '../components/Picture.astro';
+import Icon from '../components/Icon.astro';
+import site from '../data/site.json';
+
+// Captions are required for spoken video. Add a .vtt file under public/media and set its path here.
+const videos = [
+  { src: '/media/founder-video-1.mp4', title: 'Video 1 from the founder', captions: '' },
+  { src: '/media/founder-video-2.mp4', title: 'Video 2 from the founder', captions: '' },
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Veronica Magembe',
+    jobTitle: 'Founder & Executive Director',
+    worksFor: { '@type': 'NGO', name: site.name },
+    image: new URL('/images/founder-veronica-magembe-800.webp', Astro.site).href,
+  },
+];
+---
+
+<BaseLayout
+  title="Meet our founder"
+  description="Meet Veronica Magembe, founder and executive director of America Back to God Mission."
+  jsonLd={jsonLd}
+>
+  <PageHero title="Meet our founder" eyebrow="About us" />
+
+  <section class="section" aria-labelledby="founder-name">
+    <div class="container split split--wide-left founder">
+      <div class="founder__intro">
+        <SectionHeading number="01" eyebrow="Founder &amp; Executive Director" id="founder-name" title="Veronica Magembe" />
+        <ul class="founder__social" aria-label="Follow us">
+          <li>
+            <a class="btn btn--outline" href={site.social.facebook} target="_blank" rel="noopener noreferrer">
+              <Icon name="facebook" /> Facebook<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+          <li>
+            <a class="btn btn--outline" href={site.social.instagram} target="_blank" rel="noopener noreferrer">
+              <Icon name="instagram" /> Instagram<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+          <li>
+            <a class="btn btn--outline" href={site.social.youtube} target="_blank" rel="noopener noreferrer">
+              <Icon name="youtube" /> YouTube<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="founder__photo">
+        <Picture id="founder-veronica-magembe" sizes="(min-width: 64rem) 26rem, 90vw" ratio="1 / 1" loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper-deep" aria-labelledby="videos-title">
+    <div class="container">
+      <SectionHeading number="02" eyebrow="Watch" id="videos-title" title="Videos" />
+      <div class="videos">
+        {videos.map((v) => (
+          <figure>
+            <video controls preload="metadata" playsinline aria-label={v.title}>
+              <source src={v.src} type="video/mp4" />
+              {v.captions && <track kind="captions" src={v.captions} srclang="en" label="English" default />}
+              <p>Your browser cannot play this video. <a href={v.src}>Download it</a>.</p>
+            </video>
+            <figcaption>{v.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .founder__photo {
+    max-width: 26rem;
+  }
+  .founder__photo :global(img) {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .founder__intro :global(.section-heading) {
+    margin-bottom: var(--space-6);
+  }
+  .founder__intro :global(.section-heading h2) {
+    font-size: var(--step-4);
+  }
+  .founder__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .videos {
+    display: grid;
+    gap: var(--space-6);
+  }
+  @media (min-width: 48rem) {
+    .videos {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  figure {
+    margin: 0;
+  }
+  video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--navy-950);
+    border-radius: var(--radius);
+  }
+  figcaption {
+    margin-top: var(--space-2);
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+</style>

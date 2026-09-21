@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Gallery from '../components/Gallery.astro';
+---
+
+<BaseLayout
+  title="Gallery"
+  description="Photos from America Back to God Mission prayer conferences and gatherings. Filter by 2023 Conference or 2022."
+  image="/og-gallery.jpg"
+  imageAlt="Attendees kneel and pray together around a basin at an America Back to God conference"
+>
+  <PageHero title="Gallery" eyebrow="From our gatherings">
+    <p>Photos from our prayer conferences and meetings. Select a photo to view it larger.</p>
+  </PageHero>
+
+  <section class="section" aria-label="Photo gallery">
+    <div class="container">
+      <Gallery />
+    </div>
+  </section>
+</BaseLayout>

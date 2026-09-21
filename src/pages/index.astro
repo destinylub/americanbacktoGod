@@ -1,0 +1,490 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Picture from '../components/Picture.astro';
+import Icon from '../components/Icon.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import EventCard from '../components/EventCard.astro';
+import Scripture from '../components/Scripture.astro';
+import Gallery from '../components/Gallery.astro';
+import NextMeeting from '../components/NextMeeting.astro';
+import { getPast, getUpcoming } from '../lib/events';
+import site from '../data/site.json';
+
+const upcoming = getUpcoming();
+const past = getPast();
+
+const approach = [
+  { icon: 'book-open', title: 'Educate', text: 'Create informative content, host seminars, and distribute materials to educate the public.' },
+  { icon: 'users', title: 'Community Building', text: 'Foster a sense of community among like-minded individuals who share our vision.' },
+  { icon: 'megaphone', title: 'Advocacy', text: 'Advocate for policies and initiatives that reflect our values.' },
+  { icon: 'messages-square', title: 'Dialogue', text: 'Engage in open and respectful dialogue with those who hold differing perspectives.' },
+] as const;
+
+const galleryPicks = [
+  'conference-foot-washing-prayer',
+  'worship-dance-in-white-robe',
+  'conference-choir-in-red',
+  'choir-in-yellow-tops',
+  'stage-gathering-under-banner',
+  'congregation-with-raised-hands',
+];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'NGO',
+    name: site.name,
+    url: Astro.site?.href,
+    logo: new URL('/icon-512.png', Astro.site).href,
+    description: site.description,
+    email: site.email,
+    telephone: `+1-${site.phone}`,
+    sameAs: Object.values(site.social),
+  },
+];
+---
+
+<BaseLayout
+  title={site.name}
+  description="America Back to God Mission is committed to preserving and promoting the spiritual heritage of the United States. Join us for prayer on the first Friday of every month in Alpharetta, Georgia."
+  jsonLd={jsonLd}
+>
+  <!-- Hero: who we are and what we invite people to do -->
+  <section class="hero on-dark" aria-labelledby="hero-title">
+    <div class="container hero__grid">
+      <div class="hero__head">
+        <p class="eyebrow">America Back to God Mission</p>
+        <h1 id="hero-title">
+          <span>Come, let's unite in prayer</span>
+          <span class="hero__line-2">for America Back to God</span>
+        </h1>
+      </div>
+      <div class="hero__body">
+        <p class="lead">
+          We are committed to preserving and promoting the spiritual heritage of the United States. Join us on the first
+          Friday of every month as we intercede for our nation.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--light" href="/events/monthly-prayer-meeting/">
+            Join the monthly prayer meeting
+            <Icon name="arrow-right" />
+          </a>
+          <a class="link-arrow hero__more" href="/events/">
+            See all events
+            <Icon name="arrow-right" />
+          </a>
+        </div>
+        <ul class="hero__facts">
+          <li>
+            <Icon name="calendar" />
+            <span>Next meeting: <NextMeeting /></span>
+          </li>
+          <li>
+            <Icon name="clock" />
+            <span>Dinner at 6:00 PM, worship and prayer 7:00 to 8:30 PM ({site.timezoneLabel})</span>
+          </li>
+          <li>
+            <Icon name="map-pin" />
+            <span>Alpharetta, Georgia. Free food, free prayer, free admission.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="hero__media">
+        <Picture
+          id="conference-speaker-beside-flag"
+          sizes="(min-width: 64rem) 30rem, 90vw"
+          loading="eager"
+          priority
+          ratio="4 / 5"
+          position="50% 30%"
+        />
+      </div>
+    </div>
+  </section>
+
+  <div class="journey">
+    <!-- 01 Mission -->
+    <section class="section" aria-labelledby="mission-title">
+      <div class="container mission">
+        <div class="mission__text">
+          <SectionHeading
+            number="01"
+            eyebrow="Our mission"
+            id="mission-title"
+            title="Preserving and promoting the spiritual heritage of the United States"
+          />
+          <p class="lead">
+            We believe that America's greatness is rooted in its Godly principles, and we are passionate about
+            rekindling these values for a brighter future.
+          </p>
+          <p>
+            Our mission is to bring America Back to God by raising awareness of the nation's foundation on Godly
+            principles, transforming it into a blessed nation that continues to be a beacon of blessings to other
+            nations.
+          </p>
+          <a class="link-arrow" href="/about-us/">
+            Read more about us
+            <Icon name="arrow-right" />
+          </a>
+        </div>
+        <aside class="founder-card" aria-label="Our founder">
+          <Picture id="founder-veronica-magembe" sizes="(min-width: 64rem) 22rem, 90vw" ratio="1 / 1" position="50% 25%" />
+          <div class="founder-card__body">
+            <p class="founder-card__name">Veronica Magembe</p>
+            <p class="founder-card__role">Founder &amp; Executive Director</p>
+            <a class="link-arrow" href="/meet-our-founder/">
+              Meet our founder
+              <Icon name="arrow-right" />
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 02 Approach -->
+    <section class="section section--paper-deep" aria-labelledby="approach-title">
+      <div class="container">
+        <SectionHeading number="02" eyebrow="Our approach" id="approach-title" title="To achieve our goals, we will" />
+        <ul class="card-grid" role="list">
+          {approach.map((a) => (
+            <li class="info-card">
+              <span class="info-card__icon"><Icon name={a.icon} /></span>
+              <h3>{a.title}</h3>
+              <p>{a.text}</p>
+            </li>
+          ))}
+        </ul>
+        <p class="approach__more">
+          <a class="link-arrow" href="/about-us/#approach">
+            Read more about our approach
+            <Icon name="arrow-right" />
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 03 Events -->
+    <section class="section" aria-labelledby="events-title">
+      <div class="container">
+        <SectionHeading number="03" eyebrow="Events" id="events-title" title="Gather with us in prayer" />
+        {upcoming.length > 0 ? (
+          <div class="event-list">
+            {upcoming.map((o) => <EventCard occurrence={o} status="upcoming" />)}
+          </div>
+        ) : (
+          <p class="notice">No upcoming events are scheduled right now. Please check back soon.</p>
+        )}
+        {past.length > 0 && (
+          <>
+            <h3 class="events__past-title">Past events</h3>
+            <div class="event-list event-list--two">
+              {past.map((o) => <EventCard occurrence={o} status="past" />)}
+            </div>
+          </>
+        )}
+        <p class="events__all">
+          <a class="btn btn--outline" href="/events/">All events</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Scripture -->
+    <section class="verse on-dark" aria-label="Scripture">
+      <div class="container container--narrow">
+        <Scripture dark />
+      </div>
+    </section>
+
+    <!-- 04 Gallery -->
+    <section class="section" aria-labelledby="gallery-title">
+      <div class="container">
+        <SectionHeading number="04" eyebrow="From the gallery" id="gallery-title" title="Moments from our gatherings" />
+        <Gallery pick={galleryPicks} filters={false} />
+        <p class="gallery__all">
+          <a class="btn btn--outline" href="/gallery/">View the full gallery</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 05 Get involved -->
+    <section class="section section--paper-deep" aria-labelledby="involved-title">
+      <div class="container">
+        <SectionHeading
+          number="05"
+          eyebrow="Get involved"
+          id="involved-title"
+          title="Join us in our mission to bring America Back to God"
+        />
+        <ul class="card-grid" role="list">
+          <li class="info-card">
+            <span class="info-card__icon"><Icon name="heart-handshake" /></span>
+            <h3>Becoming a Member</h3>
+            <p>Join our organization and actively participate in our programs.</p>
+            <a class="link-arrow" href="/becoming-a-member/">Join<span class="sr-only"> as a member</span> <Icon name="arrow-right" /></a>
+          </li>
+          <li class="info-card">
+            <span class="info-card__icon"><Icon name="users" /></span>
+            <h3>Volunteering</h3>
+            <p>Contribute your time and skills to support our initiatives.</p>
+            <a class="link-arrow" href="/volunteering/">Join<span class="sr-only"> as a volunteer</span> <Icon name="arrow-right" /></a>
+          </li>
+          <li class="info-card">
+            <span class="info-card__icon"><Icon name="hand-heart" /></span>
+            <h3>Donating</h3>
+            <p>Help fund our educational efforts and advocacy work.</p>
+            <a class="link-arrow" href="/donate/">Learn more<span class="sr-only"> about donating</span> <Icon name="arrow-right" /></a>
+          </li>
+          <li class="info-card">
+            <span class="info-card__icon"><Icon name="share-2" /></span>
+            <h3>Spreading the Word</h3>
+            <p>Share our message with your network and on social media.</p>
+            <ul class="involved__social" aria-label="Follow us">
+              <li>
+                <a href={site.social.facebook} target="_blank" rel="noopener noreferrer">
+                  <Icon name="facebook" /> Facebook<span class="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
+              <li>
+                <a href={site.social.instagram} target="_blank" rel="noopener noreferrer">
+                  <Icon name="instagram" /> Instagram<span class="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
+              <li>
+                <a href={site.social.youtube} target="_blank" rel="noopener noreferrer">
+                  <Icon name="youtube" /> YouTube<span class="sr-only"> (opens in a new tab)</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding-block: clamp(3rem, 2rem + 5vw, 6.5rem);
+  }
+  .hero__grid {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: 1fr;
+    grid-template-areas: 'head' 'body' 'media';
+  }
+  @media (min-width: 64rem) {
+    .hero__grid {
+      grid-template-columns: 7fr 5fr;
+      grid-template-areas: 'head head' 'body media';
+      column-gap: var(--space-9);
+      row-gap: var(--space-7);
+      align-items: center;
+    }
+  }
+  .hero__head {
+    grid-area: head;
+    animation: rise-in 0.8s var(--ease) both;
+  }
+  .hero__body {
+    grid-area: body;
+    align-self: start;
+    animation: rise-in 0.8s 0.1s var(--ease) both;
+  }
+  .hero h1 {
+    margin-bottom: 0;
+    font-size: clamp(2.25rem, 1.2rem + 4.6vw, 4.75rem);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  .hero h1 span {
+    display: block;
+  }
+  .hero__line-2 {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--navy-100);
+  }
+  .hero .lead {
+    max-width: 36rem;
+    color: var(--navy-100);
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4) var(--space-6);
+    margin-block: var(--space-6);
+  }
+  .hero__facts {
+    display: grid;
+    gap: var(--space-3);
+    margin: 0;
+    padding: var(--space-5) 0 0;
+    list-style: none;
+    border-top: 3px dotted rgb(255 255 255 / 0.35);
+    color: var(--navy-100);
+  }
+  .hero__facts li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  .hero__facts :global(.icon) {
+    margin-top: 0.2em;
+    color: var(--red-300);
+  }
+  .hero__facts time {
+    color: var(--white);
+    font-weight: 700;
+  }
+  .hero__media {
+    grid-area: media;
+    position: relative;
+    max-width: 28rem;
+    justify-self: center;
+    width: 100%;
+    animation: fade-in 1s var(--ease) both;
+  }
+  .hero__media::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translate(0.875rem, 0.875rem);
+    border: 2px solid var(--red-300);
+    border-radius: var(--radius);
+  }
+  .hero__media :global(picture) {
+    position: relative;
+    display: block;
+  }
+  .hero__media :global(img) {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius);
+    background: var(--navy-600);
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* The dotted path: a rail that runs down the left margin on wide screens */
+  .journey {
+    position: relative;
+  }
+  @media (min-width: 82rem) {
+    .journey::before {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      bottom: 0;
+      left: calc(50% - var(--container) / 2 - 2.75rem);
+      border-left: 3px dotted var(--navy-300);
+      pointer-events: none;
+    }
+    .journey::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      bottom: -0.4rem;
+      left: calc(50% - var(--container) / 2 - 2.75rem - 0.45rem);
+      width: 0.9rem;
+      height: 0.9rem;
+      border-radius: 50%;
+      background: var(--red-600);
+      pointer-events: none;
+    }
+  }
+
+  /* 01 Mission */
+  .mission {
+    display: grid;
+    gap: var(--space-7);
+    align-items: start;
+  }
+  @media (min-width: 64rem) {
+    .mission {
+      grid-template-columns: 7fr 4fr;
+      gap: var(--space-9);
+    }
+  }
+  .mission__text :global(.section-heading) {
+    max-width: none;
+    margin-bottom: var(--space-6);
+  }
+  .mission__text :global(.section-heading h2) {
+    font-size: var(--step-4);
+  }
+  .founder-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+    max-width: 24rem;
+  }
+  .founder-card :global(img) {
+    width: 100%;
+  }
+  .founder-card__body {
+    padding: var(--space-5);
+  }
+  .founder-card__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    color: var(--navy-600);
+  }
+  .founder-card__role {
+    margin-bottom: var(--space-4);
+    color: var(--text-muted);
+  }
+
+  .approach__more {
+    margin: var(--space-6) 0 0;
+  }
+  .involved__social {
+    display: grid;
+    gap: var(--space-2);
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .involved__social a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 700;
+  }
+
+  /* 03 Events */
+  .event-list {
+    display: grid;
+    gap: var(--space-5);
+  }
+  @media (min-width: 64rem) {
+    .event-list--two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .events__past-title {
+    margin: var(--space-8) 0 var(--space-5);
+    font-size: var(--step-2);
+  }
+  .events__all,
+  .gallery__all {
+    margin: var(--space-7) 0 0;
+  }
+
+  /* Scripture band */
+  .verse {
+    padding-block: var(--section-y);
+    background: var(--navy-900);
+  }
+</style>

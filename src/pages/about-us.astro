@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Icon from '../components/Icon.astro';
+
+const values = [
+  { title: 'Faith', text: 'We believe in the importance of faith in God as a guiding principle for individuals and the nation.' },
+  { title: 'Morality', text: 'We uphold strong moral values as the foundation for a just and compassionate society.' },
+  { title: 'Unity', text: 'We foster unity among Americans, transcending differences to work together for a common purpose.' },
+  { title: 'Freedom', text: "We champion the freedom to practice one's faith and uphold individual liberties." },
+] as const;
+
+const goals = [
+  { title: 'Educate', text: "Develop educational materials and programs that highlight America's spiritual heritage." },
+  { title: 'Inspire', text: 'Inspire individuals to embrace and live out Godly principles in their daily lives.' },
+  { title: 'Advocate', text: 'Advocate for policies and initiatives that align with our values.' },
+  { title: 'Engage', text: 'Engage with diverse communities, institutions, and policymakers in meaningful dialogue.' },
+  { title: 'Strengthen', text: 'Strengthen the fabric of American society by promoting unity and shared values.' },
+];
+
+const approach = [
+  { icon: 'book-open', title: 'Educate', text: 'Create informative content, host seminars, and distribute materials to educate the public.' },
+  { icon: 'users', title: 'Community Building', text: 'Foster a sense of community among like-minded individuals who share our vision.' },
+  { icon: 'megaphone', title: 'Advocacy', text: 'Advocate for policies and initiatives that reflect our values.' },
+  { icon: 'messages-square', title: 'Dialogue', text: 'Engage in open and respectful dialogue with those who hold differing perspectives.' },
+] as const;
+---
+
+<BaseLayout
+  title="About Us"
+  description="The mission, vision, core values and approach of America Back to God Mission, a prayer and faith-based mission preserving the spiritual heritage of the United States."
+>
+  <PageHero title="About Us" eyebrow="Who we are">
+    <p>
+      America Back to God Mission is committed to preserving and promoting the spiritual heritage of the United States.
+      We believe that America's greatness is rooted in its Godly principles, and we are passionate about rekindling these
+      values for a brighter future.
+    </p>
+  </PageHero>
+
+  <section class="section" aria-labelledby="mission-title">
+    <div class="container">
+      <SectionHeading number="01" eyebrow="Mission and vision" id="mission-title" title="Where we are headed" />
+      <div class="split">
+        <div class="statement">
+          <h3>Our Mission</h3>
+          <p>
+            To bring America Back to God by raising awareness of the nation's foundation on Godly principles, transforming
+            it into a blessed nation that continues to be a beacon of blessings to other nations.
+          </p>
+        </div>
+        <div class="statement">
+          <h3>Our Vision</h3>
+          <p>
+            We envision an America where faith, morality, and freedom are celebrated, where citizens unite under shared
+            values, and where the nation's spiritual heritage is honored and preserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper-deep" aria-labelledby="values-title">
+    <div class="container">
+      <SectionHeading number="02" eyebrow="Core values" id="values-title" title="At the heart of our organization" />
+      <ul class="card-grid" role="list">
+        {values.map((v) => (
+          <li class="info-card">
+            <h3>{v.title}</h3>
+            <p>{v.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="goals-title">
+    <div class="container">
+      <SectionHeading number="03" eyebrow="Goals and objectives" id="goals-title" title="What we work toward" />
+      <ol class="steps">
+        {goals.map((g) => (
+          <li>
+            <h3>{g.title}</h3>
+            <p>{g.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--paper-deep" id="approach" aria-labelledby="approach-title">
+    <div class="container">
+      <SectionHeading number="04" eyebrow="Our approach" id="approach-title" title="To achieve our goals, we will" />
+      <ul class="card-grid" role="list">
+        {approach.map((a) => (
+          <li class="info-card">
+            <span class="info-card__icon"><Icon name={a.icon} /></span>
+            <h3>{a.title}</h3>
+            <p>{a.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="involved-title">
+    <div class="container">
+      <SectionHeading number="05" eyebrow="Get involved" id="involved-title" title="Join us in our mission to bring America Back to God" />
+      <div class="actions">
+        <a class="btn btn--navy" href="/becoming-a-member/">Becoming a Member</a>
+        <a class="btn btn--outline" href="/volunteering/">Volunteering</a>
+        <a class="btn btn--outline" href="/donate/">Donate</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+</style>

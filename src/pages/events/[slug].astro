@@ -1,0 +1,218 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Picture from '../../components/Picture.astro';
+import Icon from '../../components/Icon.astro';
+import Scripture from '../../components/Scripture.astro';
+import NextMeeting from '../../components/NextMeeting.astro';
+import { formatLocation, getAllEvents, googleCalendarUrl, occurrenceFor } from '../../lib/events';
+import { formatTime, toZonedIso } from '../../lib/dates';
+import site from '../../data/site.json';
+
+export function getStaticPaths() {
+  return getAllEvents().map((event) => ({ params: { slug: event.slug }, props: { event } }));
+}
+
+const { event } = Astro.props;
+const o = occurrenceFor(event);
+const isPast = o.end < new Date();
+const address = formatLocation(event.location);
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+const isFree = /free/i.test(event.cost);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.title,
+    description: event.description.join(' '),
+    startDate: toZonedIso(o.startDate, event.startTime, site.timezone),
+    endDate: toZonedIso(o.endDate, event.endTime, site.timezone),
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    isAccessibleForFree: isFree || undefined,
+    image: [new URL(`/images/${event.flyer}-800.webp`, Astro.site).href],
+    location: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: event.location.address,
+        addressLocality: event.location.city,
+        addressRegion: event.location.region,
+        postalCode: event.location.postalCode,
+        addressCountry: 'US',
+      },
+    },
+    organizer: { '@type': 'Organization', name: site.name, url: Astro.site?.href },
+  },
+];
+---
+
+<BaseLayout title={event.title} description={`${event.title}: ${o.dateLabel}, ${o.timeLabel}, ${event.location.city}, ${event.location.region}. ${event.tagline ?? ''}`.trim()} jsonLd={jsonLd}>
+  <PageHero title={event.title} eyebrow={isPast ? 'Past event' : 'Upcoming event'}>
+    {event.tagline && <p>{event.tagline}</p>}
+  </PageHero>
+
+  <section class="section" aria-label="Event details">
+    <div class="container split split--wide-left">
+      <div>
+        <p class="back">
+          <a class="link-arrow back__link" href="/events/">
+            <Icon name="chevron-left" />
+            All events
+          </a>
+        </p>
+
+        {isPast && <p class="notice past-note">This event has passed.</p>}
+
+        <dl class="facts">
+          <div>
+            <dt><Icon name="calendar" /> Date</dt>
+            <dd>
+              {o.isRecurring ? (
+                <>Every 1st Friday of the month. Next meeting: <strong><NextMeeting /></strong></>
+              ) : (
+                o.dateLabel
+              )}
+            </dd>
+          </div>
+          <div>
+            <dt><Icon name="clock" /> Time</dt>
+            <dd>
+              {event.agenda ? (
+                <ul class="agenda">
+                  {event.agenda.map((a) => (
+                    <li><strong>{a.label}:</strong> {formatTime(a.start)} to {formatTime(a.end)}</li>
+                  ))}
+                </ul>
+              ) : (
+                <>{o.timeLabel}{o.startDate !== o.endDate && ' each evening'}</>
+              )}
+              <span class="tz"> ({site.timezoneLabel})</span>
+            </dd>
+          </div>
+          <div>
+            <dt><Icon name="map-pin" /> Location</dt>
+            <dd>
+              {address}
+              {!isPast && (
+                <>
+                  <br />
+                  <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+                    Get directions<span class="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </>
+              )}
+            </dd>
+          </div>
+          {event.cost && (
+            <div>
+              <dt><Icon name="heart-handshake" /> Cost</dt>
+              <dd>{event.cost}</dd>
+            </div>
+          )}
+          {event.speakers && (
+            <div>
+              <dt><Icon name="users" /> Featured</dt>
+              <dd>
+                <ul class="agenda">
+                  {event.speakers.map((s) => <li>{s}</li>)}
+                </ul>
+              </dd>
+            </div>
+          )}
+        </dl>
+
+        <div class="prose">
+          {event.description.map((p) => <p>{p}</p>)}
+        </div>
+
+        {!isPast && (
+          <p class="actions">
+            <a class="btn btn--navy" href={googleCalendarUrl(o)} target="_blank" rel="noopener noreferrer">
+              <Icon name="calendar" />
+              Add to Google Calendar<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+            <a class="btn btn--outline" href="/contact-us/">Questions? Contact us</a>
+          </p>
+        )}
+      </div>
+
+      <div class="flyer">
+        <Picture id={event.flyer} sizes="(min-width: 64rem) 26rem, 90vw" loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  {event.scripture && (
+    <section class="verse on-dark" aria-label="Scripture">
+      <div class="container container--narrow">
+        <Scripture dark />
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .back {
+    margin-bottom: var(--space-5);
+  }
+  .past-note {
+    margin-bottom: var(--space-5);
+  }
+  .facts {
+    margin: 0 0 var(--space-6);
+    display: grid;
+    gap: 0;
+  }
+  .facts > div {
+    display: grid;
+    gap: var(--space-2) var(--space-5);
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--rule);
+  }
+  .facts > div:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (min-width: 40rem) {
+    .facts > div {
+      grid-template-columns: 9rem 1fr;
+    }
+  }
+  dt {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 700;
+    color: var(--navy-600);
+  }
+  dd {
+    margin: 0;
+  }
+  .agenda {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tz {
+    color: var(--text-muted);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+  .flyer {
+    max-width: 26rem;
+  }
+  .flyer :global(img) {
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+  .verse {
+    padding-block: var(--section-y);
+    background: var(--navy-900);
+  }
+</style>
