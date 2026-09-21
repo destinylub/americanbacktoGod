@@ -1,0 +1,73 @@
+{
+  "events": [
+    {
+      "slug": "monthly-prayer-meeting",
+      "title": "Monthly Prayer Meeting",
+      "tagline": "Come join us as we intercede for our nation.",
+      "kind": "monthly",
+      "recurrence": "first-friday",
+      "startTime": "18:00",
+      "endTime": "20:30",
+      "agenda": [
+        { "label": "Dinner", "start": "18:00", "end": "19:00" },
+        { "label": "Worship and prayer", "start": "19:00", "end": "20:30" }
+      ],
+      "location": {
+        "address": "380 Grayson Way",
+        "city": "Alpharetta",
+        "region": "GA",
+        "postalCode": "30004"
+      },
+      "cost": "Free food, free prayer, free admission",
+      "flyer": "flyer-monthly-prayer-meeting",
+      "description": [
+        "Join us every 1st Friday of the month as we intercede for our nation. The evening begins with dinner, followed by worship and prayer."
+      ],
+      "scripture": true
+    },
+    {
+      "slug": "8th-annual-prayer-conference",
+      "title": "8th Annual Prayer Conference",
+      "tagline": "Come join us as we intercede.",
+      "kind": "conference",
+      "startDate": "2024-10-24",
+      "endDate": "2024-10-26",
+      "startTime": "18:00",
+      "endTime": "21:00",
+      "location": {
+        "address": "90 Herndon Lane",
+        "city": "Canton",
+        "region": "GA",
+        "postalCode": "30114"
+      },
+      "cost": "Free event, free parking",
+      "speakers": ["Minister Shammah Chenhaka", "Minister Veronica Magembe", "Pastor Mirek Hufton"],
+      "flyer": "flyer-2024-prayer-conference",
+      "description": [
+        "Three evenings of prayer, October 24 to 26, 2024, from 6:00 PM to 9:00 PM. The event and parking were free."
+      ]
+    },
+    {
+      "slug": "prayer-conference-2023",
+      "title": "2023 Prayer Conference",
+      "tagline": "God is not done with the USA.",
+      "kind": "conference",
+      "startDate": "2023-11-09",
+      "endDate": "2023-11-11",
+      "startTime": "18:00",
+      "endTime": "21:00",
+      "location": {
+        "address": "1075 Holcomb Bridge Rd",
+        "city": "Roswell",
+        "region": "GA",
+        "postalCode": "30076"
+      },
+      "cost": "",
+      "speakers": ["Host: Veronica Magembe", "Apostle Michael Warui", "Prophet Rizichi Githinji", "Pastor Mirek Hufton"],
+      "flyer": "flyer-2023-prayer-conference",
+      "description": [
+        "The 7th Annual America Back to God Prayer Conference, November 9 to 11, 2023, from 6:00 PM to 9:00 PM."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "contact": { "embedUrl": "", "title": "Contact form" },
+  "member": { "embedUrl": "", "title": "Membership form" },
+  "volunteer": { "embedUrl": "", "title": "Volunteer form" }
+}

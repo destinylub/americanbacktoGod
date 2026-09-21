@@ -1,0 +1,158 @@
+{
+  "groups": [
+    {
+      "id": "conference-2023",
+      "label": "2023 Conference"
+    },
+    {
+      "id": "2022",
+      "label": "2022"
+    }
+  ],
+  "photos": [
+    {
+      "image": "conference-woman-in-magenta-jacket",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-foot-washing-prayer",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-two-women-embracing",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-three-women-seated",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-speaker-beside-flag",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-worship-team-on-stage",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-man-with-raised-arm",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-embrace-at-podium",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-group-praying-with-basin",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-attendees-standing-in-prayer",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-kneeling-prayer",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-prayer-at-lectern",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-attendees-praying-together",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-preacher-under-banner",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-welcome-table",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-choir-in-red",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-prayer-on-stage",
+      "group": "conference-2023"
+    },
+    {
+      "image": "conference-speaker-in-navy-suit",
+      "group": "conference-2023"
+    },
+    {
+      "image": "speaker-in-coral-dress",
+      "group": "2022"
+    },
+    {
+      "image": "worship-dance-in-white-robe",
+      "group": "2022"
+    },
+    {
+      "image": "woman-speaking-in-white-vest",
+      "group": "2022"
+    },
+    {
+      "image": "woman-singing-under-banner",
+      "group": "2022"
+    },
+    {
+      "image": "woman-speaking-under-banner",
+      "group": "2022"
+    },
+    {
+      "image": "man-speaking-under-banner",
+      "group": "2022"
+    },
+    {
+      "image": "worship-dance-with-gold-belt",
+      "group": "2022"
+    },
+    {
+      "image": "worship-dance-arms-outstretched",
+      "group": "2022"
+    },
+    {
+      "image": "stage-gathering-under-banner",
+      "group": "2022"
+    },
+    {
+      "image": "speaker-with-flag-screen",
+      "group": "2022"
+    },
+    {
+      "image": "women-singing-on-stage",
+      "group": "2022"
+    },
+    {
+      "image": "choir-leader-in-floral-dress",
+      "group": "2022"
+    },
+    {
+      "image": "choir-in-yellow-tops",
+      "group": "2022"
+    },
+    {
+      "image": "choir-in-yellow-tops-wide",
+      "group": "2022"
+    },
+    {
+      "image": "man-preaching-with-choir",
+      "group": "2022"
+    },
+    {
+      "image": "woman-in-floral-dress-smiling",
+      "group": "2022"
+    },
+    {
+      "image": "congregation-with-raised-hands",
+      "group": "2022"
+    },
+    {
+      "image": "speaker-in-white-jacket",
+      "group": "2022"
+    }
+  ]
+}
