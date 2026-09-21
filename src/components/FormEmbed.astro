@@ -1,0 +1,88 @@
+---
+// Shows a Google Form when its embed URL is set in src/data/forms.json. Until then it shows real contact
+// details instead of a form, so nothing looks submittable when it is not.
+import Icon from './Icon.astro';
+import forms from '../data/forms.json';
+import site from '../data/site.json';
+
+interface Props {
+  form: keyof typeof forms;
+  /** Accessible name for the embedded form. */
+  title?: string;
+  /** Short prompt shown above the fallback contact details. */
+  fallbackIntro?: string;
+}
+
+const { form, fallbackIntro = 'Our online form is being connected. Until then, please reach us directly.' } = Astro.props;
+const config = forms[form];
+const url = config.embedUrl.trim();
+// Only Google Forms addresses are embedded. Anything else is ignored.
+const isGoogleForm = /^https:\/\/docs\.google\.com\/forms\//.test(url);
+const openUrl = url.replace(/([?&])embedded=true&?/, '$1').replace(/[?&]$/, '');
+---
+
+{
+  isGoogleForm ? (
+    <div class="form-embed">
+      <iframe
+        src={url}
+        title={config.title}
+        loading="lazy"
+        width="100%"
+        height="1100"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+      >
+        Loading form
+      </iframe>
+      <p class="form-embed__alt">
+        Trouble viewing the form? <a href={openUrl} target="_blank" rel="noopener noreferrer">Open it in a new tab<span class="sr-only"> (opens in a new tab)</span></a>.
+      </p>
+    </div>
+  ) : (
+    <div class="notice form-fallback">
+      <p><strong>{fallbackIntro}</strong></p>
+      <ul>
+        <li>
+          <Icon name="phone" />
+          <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+        </li>
+        <li>
+          <Icon name="mail" />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+      </ul>
+    </div>
+  )
+}
+
+<style>
+  .form-embed iframe {
+    display: block;
+    width: 100%;
+    min-height: 40rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--white);
+  }
+  .form-embed__alt {
+    margin-top: var(--space-3);
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+  .form-fallback ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .form-fallback li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .form-fallback :global(.icon) {
+    color: var(--navy-600);
+  }
+</style>

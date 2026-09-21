@@ -1,0 +1,165 @@
+---
+import Picture from './Picture.astro';
+import Icon from './Icon.astro';
+import NextMeeting from './NextMeeting.astro';
+import type { Occurrence } from '../lib/events';
+
+interface Props {
+  occurrence: Occurrence;
+  status: 'upcoming' | 'past';
+  /** Heading level for the title, so the page outline stays in order. */
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { occurrence: o, status, headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+const { event } = o;
+---
+
+<article class:list={['event-card', `event-card--${status}`]}>
+  <div class="event-card__media">
+    <Picture id={event.flyer} sizes="(min-width: 48rem) 20rem, 90vw" ratio="3 / 4" />
+  </div>
+  <div class="event-card__body">
+    <p class="event-card__status">{status === 'upcoming' ? 'Upcoming' : 'Past event'}</p>
+    <Heading class="event-card__title">
+      <a href={`/events/${event.slug}/`} class="event-card__link">{event.title}</a>
+    </Heading>
+    {event.tagline && <p class="event-card__tagline">{event.tagline}</p>}
+    <ul class="event-card__meta">
+      <li>
+        <Icon name="calendar" />
+        <span>
+          {o.isRecurring ? <>Every 1st Friday. Next: <NextMeeting /></> : o.dateLabel}
+        </span>
+      </li>
+      <li>
+        <Icon name="clock" />
+        <span>{o.timeLabel}</span>
+      </li>
+      <li>
+        <Icon name="map-pin" />
+        <span>{event.location.city}, {event.location.region}</span>
+      </li>
+    </ul>
+    <span class="link-arrow" aria-hidden="true">Learn more <Icon name="arrow-right" /></span>
+  </div>
+</article>
+
+<style>
+  .event-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition:
+      box-shadow 0.25s var(--ease),
+      border-color 0.25s var(--ease);
+  }
+  .event-card:hover {
+    box-shadow: var(--shadow-card);
+    border-color: var(--navy-300);
+  }
+  .event-card:has(:focus-visible) {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+  @media (min-width: 40rem) {
+    .event-card {
+      grid-template-columns: 12rem 1fr;
+    }
+  }
+  @media (min-width: 64rem) {
+    .event-card {
+      grid-template-columns: 14rem 1fr;
+    }
+  }
+  .event-card__media {
+    display: none;
+    background: var(--paper-deep);
+  }
+  @media (min-width: 40rem) {
+    .event-card__media {
+      display: block;
+    }
+  }
+  /* The flyer is cropped to fill the column top to bottom, so it never leaves an empty strip. */
+  .event-card__media :global(picture) {
+    display: block;
+    height: 100%;
+  }
+  .event-card__media :global(img) {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto !important;
+    object-fit: cover;
+    object-position: top;
+  }
+  .event-card__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-4);
+  }
+  @media (min-width: 40rem) {
+    .event-card__body {
+      padding: var(--space-5);
+    }
+  }
+  .event-card__status {
+    margin: 0 0 var(--space-2);
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red-600);
+  }
+  .event-card--past .event-card__status {
+    color: var(--slate);
+  }
+  .event-card :global(.event-card__title) {
+    margin-bottom: var(--space-2);
+    font-size: var(--step-2);
+  }
+  /* The title link covers the whole card, so there is one tab stop per event. */
+  .event-card__link {
+    color: var(--navy-600);
+    text-decoration: none;
+  }
+  .event-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .event-card__link:focus-visible {
+    outline: none;
+  }
+  .event-card__tagline {
+    color: var(--text-muted);
+  }
+  .event-card__meta {
+    margin: 0 0 var(--space-4);
+    padding: 0;
+    list-style: none;
+  }
+  .event-card__meta li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .event-card__meta :global(.icon) {
+    margin-top: 0.2em;
+    color: var(--navy-600);
+  }
+  .event-card .link-arrow {
+    margin-top: auto;
+    color: var(--navy-600);
+  }
+  .event-card:hover .link-arrow :global(.icon) {
+    transform: translateX(4px);
+  }
+</style>

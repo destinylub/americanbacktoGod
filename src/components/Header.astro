@@ -1,0 +1,364 @@
+---
+import Picture from './Picture.astro';
+import Icon from './Icon.astro';
+import site from '../data/site.json';
+
+const path = Astro.url.pathname;
+const current = (href: string) => ((href === '/' ? path === '/' : path.startsWith(href)) ? 'page' : undefined);
+
+interface NavItem {
+  label: string;
+  href: string;
+  children?: { label: string; href: string }[];
+}
+
+const nav: NavItem[] = [
+  {
+    label: 'About us',
+    href: '/about-us/',
+    children: [
+      { label: 'Our mission and values', href: '/about-us/' },
+      { label: 'Meet our founder', href: '/meet-our-founder/' },
+    ],
+  },
+  { label: 'Events', href: '/events/' },
+  { label: 'Gallery', href: '/gallery/' },
+  {
+    label: 'Get involved',
+    href: '/becoming-a-member/',
+    children: [
+      { label: 'Becoming a member', href: '/becoming-a-member/' },
+      { label: 'Volunteering', href: '/volunteering/' },
+      { label: 'Donate', href: '/donate/' },
+    ],
+  },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="brand" href="/" aria-label={`${site.name}, home`}>
+      <Picture id="logo" sizes="48px" loading="eager" alt="" class="brand__logo" />
+      <span class="brand__name">America Back<br />to God Mission</span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-toggle>
+      <span class="menu-toggle__open"><Icon name="menu" /></span>
+      <span class="menu-toggle__close"><Icon name="x" /></span>
+      <span class="sr-only">Menu</span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Main" data-site-nav>
+      <ul class="site-nav__list">
+        {nav.map((item) => (
+          <li class:list={['site-nav__item', item.children && 'has-sub']}>
+            <a href={item.href} aria-current={item.children ? undefined : current(item.href)}>{item.label}</a>
+            {item.children && (
+              <>
+                <button type="button" class="sub-toggle" aria-expanded="false" data-sub-toggle>
+                  <Icon name="chevron-down" />
+                  <span class="sr-only">{item.label} submenu</span>
+                </button>
+                <ul class="submenu">
+                  {item.children.map((child) => (
+                    <li>
+                      <a href={child.href} aria-current={current(child.href)}>{child.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+      <a class="btn btn--light site-nav__cta" href="/contact-us/" aria-current={current('/contact-us/')}>Contact us</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--navy-950);
+    color: var(--white);
+    border-bottom: 1px solid rgb(255 255 255 / 0.12);
+  }
+  .site-header__bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    min-height: var(--header-h);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--white);
+    text-decoration: none;
+  }
+  .brand:hover {
+    color: var(--white);
+  }
+  .brand :global(.brand__logo) {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--white);
+  }
+  .brand__name {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    color: var(--white);
+    background: transparent;
+    border: 2px solid rgb(255 255 255 / 0.5);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  .menu-toggle:hover {
+    border-color: var(--white);
+  }
+  .menu-toggle:focus-visible,
+  .sub-toggle:focus-visible,
+  .site-nav a:focus-visible {
+    outline-color: var(--red-300);
+  }
+  .menu-toggle__close,
+  .menu-toggle[aria-expanded='true'] .menu-toggle__open {
+    display: none;
+  }
+  .menu-toggle[aria-expanded='true'] .menu-toggle__close {
+    display: block;
+  }
+
+  /* Mobile: a full-width panel below the bar */
+  .site-nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    display: none;
+    padding: var(--space-4) var(--gutter) var(--space-6);
+    background: var(--navy-950);
+    border-bottom: 1px solid rgb(255 255 255 / 0.12);
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+  }
+  .site-nav.is-open {
+    display: block;
+  }
+  html:not(.js) .site-nav {
+    display: block;
+    position: static;
+    padding-inline: 0;
+  }
+  html:not(.js) .menu-toggle {
+    display: none;
+  }
+  html:not(.js) .site-header__bar {
+    flex-wrap: wrap;
+    padding-block: var(--space-3);
+  }
+  .site-nav__list {
+    margin: 0 0 var(--space-5);
+    padding: 0;
+    list-style: none;
+  }
+  .site-nav a:not(.btn) {
+    display: block;
+    padding: var(--space-3) 0;
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .site-nav a:not(.btn):hover {
+    color: var(--red-300);
+  }
+  .site-nav a[aria-current='page']:not(.btn) {
+    text-decoration: underline;
+    text-decoration-color: var(--red-300);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+  }
+  .sub-toggle {
+    display: none;
+  }
+  .submenu {
+    margin: 0 0 var(--space-2);
+    padding: 0 0 0 var(--space-4);
+    list-style: none;
+    border-left: 1px solid rgb(255 255 255 / 0.25);
+  }
+  .submenu a:not(.btn) {
+    font-weight: 400;
+    padding-block: var(--space-2);
+  }
+  .site-nav__cta {
+    width: 100%;
+  }
+
+  @media (max-width: 30rem) {
+    .brand__name {
+      font-size: 0.9375rem;
+    }
+  }
+
+  /* Desktop: inline bar with dropdowns */
+  @media (min-width: 68.75rem) {
+    .menu-toggle {
+      display: none;
+    }
+    .site-nav,
+    html:not(.js) .site-nav {
+      position: static;
+      display: flex;
+      align-items: center;
+      gap: var(--space-5);
+      padding: 0;
+      max-height: none;
+      overflow: visible;
+      border: 0;
+      background: transparent;
+    }
+    .site-nav__list {
+      display: flex;
+      align-items: center;
+      gap: var(--space-5);
+      margin: 0;
+    }
+    .site-nav__item {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .site-nav a:not(.btn) {
+      padding-block: var(--space-4);
+    }
+    .site-nav__cta {
+      width: auto;
+    }
+    .sub-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      margin-left: 0.125rem;
+      padding: 0;
+      color: var(--white);
+      background: transparent;
+      border: 0;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+    .sub-toggle :global(.icon) {
+      transition: transform 0.2s var(--ease);
+    }
+    .sub-toggle[aria-expanded='true'] :global(.icon) {
+      transform: rotate(180deg);
+    }
+    .submenu {
+      position: absolute;
+      top: 100%;
+      left: calc(var(--space-4) * -1);
+      display: none;
+      min-width: 15rem;
+      margin: 0;
+      padding: var(--space-2);
+      background: var(--navy-900);
+      border: 1px solid rgb(255 255 255 / 0.15);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 32px rgb(0 0 0 / 0.35);
+    }
+    .submenu a:not(.btn) {
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius);
+    }
+    .submenu a:not(.btn):hover {
+      background: rgb(255 255 255 / 0.08);
+    }
+    .has-sub.is-open > .submenu {
+      display: block;
+    }
+    /* Without script the dropdown opens on hover or keyboard focus. */
+    html:not(.js) .has-sub:hover > .submenu,
+    html:not(.js) .has-sub:focus-within > .submenu {
+      display: block;
+    }
+    @media (hover: hover) {
+      .has-sub:hover > .submenu {
+        display: block;
+      }
+    }
+  }
+</style>
+
+<script>
+  // Menu behaviour: mobile toggle plus keyboard-operable dropdowns (Enter or Space on the chevron, Escape to close).
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const nav = document.querySelector<HTMLElement>('[data-site-nav]');
+  const subs = Array.from(document.querySelectorAll<HTMLElement>('.has-sub'));
+
+  const closeSubs = (except?: HTMLElement) => {
+    for (const li of subs) {
+      if (li === except) continue;
+      li.classList.remove('is-open');
+      li.querySelector('[data-sub-toggle]')?.setAttribute('aria-expanded', 'false');
+    }
+  };
+
+  const setMenu = (open: boolean) => {
+    toggle?.setAttribute('aria-expanded', String(open));
+    nav?.classList.toggle('is-open', open);
+  };
+
+  toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+
+  for (const li of subs) {
+    const btn = li.querySelector<HTMLButtonElement>('[data-sub-toggle]');
+    btn?.addEventListener('click', () => {
+      const open = !li.classList.contains('is-open');
+      closeSubs(li);
+      li.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    // Close when keyboard focus leaves the item.
+    li.addEventListener('focusout', (event) => {
+      if (!li.contains(event.relatedTarget as Node | null)) closeSubs();
+    });
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const openSub = subs.find((li) => li.classList.contains('is-open'));
+    if (openSub) {
+      closeSubs();
+      openSub.querySelector<HTMLElement>('[data-sub-toggle]')?.focus();
+    } else if (toggle?.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      toggle.focus();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target as Element).closest('.has-sub')) closeSubs();
+  });
+</script>

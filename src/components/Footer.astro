@@ -1,0 +1,192 @@
+---
+import Picture from './Picture.astro';
+import Icon from './Icon.astro';
+import site from '../data/site.json';
+
+const year = new Date().getFullYear();
+
+const explore = [
+  { label: 'Home', href: '/' },
+  { label: 'About us', href: '/about-us/' },
+  { label: 'Meet our founder', href: '/meet-our-founder/' },
+  { label: 'Events', href: '/events/' },
+  { label: 'Gallery', href: '/gallery/' },
+];
+const involved = [
+  { label: 'Becoming a member', href: '/becoming-a-member/' },
+  { label: 'Volunteering', href: '/volunteering/' },
+  { label: 'Donate', href: '/donate/' },
+  { label: 'Contact us', href: '/contact-us/' },
+];
+const socials = [
+  { label: 'Facebook', href: site.social.facebook, icon: 'facebook' as const },
+  { label: 'Instagram', href: site.social.instagram, icon: 'instagram' as const },
+  { label: 'YouTube', href: site.social.youtube, icon: 'youtube' as const },
+];
+---
+
+<footer class="site-footer on-dark">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="site-footer__logo" href="/" aria-label={`${site.name}, home`}>
+        <Picture id="logo" sizes="72px" alt="" class="site-footer__logo-img" />
+        <span>{site.name}</span>
+      </a>
+      <p>Preserving and promoting the spiritual heritage of the United States, rooted in Godly principles.</p>
+    </div>
+
+    <nav aria-labelledby="footer-explore">
+      <h2 id="footer-explore" class="site-footer__title">Explore</h2>
+      <ul>
+        {explore.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav aria-labelledby="footer-involved">
+      <h2 id="footer-involved" class="site-footer__title">Get involved</h2>
+      <ul>
+        {involved.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="site-footer__title">Contact</h2>
+      <ul class="site-footer__contact">
+        <li>
+          <Icon name="phone" />
+          <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+        </li>
+        <li>
+          <Icon name="mail" />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+      </ul>
+      <ul class="site-footer__social" aria-label="Social media">
+        {socials.map((s) => (
+          <li>
+            <a href={s.href} target="_blank" rel="noopener noreferrer">
+              <Icon name={s.icon} />
+              <span>{s.label}<span class="sr-only"> (opens in a new tab)</span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-footer__legal">
+    <div class="container site-footer__legal-inner">
+      <p>&copy; {year} {site.name}. All rights reserved.</p>
+      <ul>
+        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/terms-and-conditions/">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy-950);
+    padding-top: var(--space-8);
+  }
+  .site-footer__grid {
+    display: grid;
+    gap: var(--space-7) var(--space-6);
+    grid-template-columns: 1fr;
+    padding-bottom: var(--space-8);
+  }
+  @media (min-width: 40rem) {
+    .site-footer__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 64rem) {
+    .site-footer__grid {
+      grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+    }
+  }
+  .site-footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    line-height: 1.15;
+    text-decoration: none;
+  }
+  .site-footer__logo :global(.site-footer__logo-img) {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    background: var(--white);
+  }
+  .site-footer__brand p {
+    max-width: 26rem;
+    color: var(--navy-100);
+  }
+  .site-footer__title {
+    margin-bottom: var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red-300);
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    margin-bottom: var(--space-2);
+  }
+  .site-footer a {
+    color: var(--white);
+    text-decoration-color: rgb(255 255 255 / 0.4);
+  }
+  .site-footer a:hover {
+    color: var(--red-300);
+    text-decoration-color: currentColor;
+  }
+  .site-footer__contact li,
+  .site-footer__social a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .site-footer__contact {
+    margin-bottom: var(--space-5);
+  }
+  .site-footer__social a {
+    text-decoration: none;
+  }
+  .site-footer__legal {
+    border-top: 1px solid rgb(255 255 255 / 0.15);
+    padding-block: var(--space-5);
+    font-size: var(--step--1);
+  }
+  .site-footer__legal-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-6);
+  }
+  .site-footer__legal p {
+    margin: 0;
+    color: var(--navy-100);
+  }
+  .site-footer__legal ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-5);
+  }
+  .site-footer__legal li {
+    margin: 0;
+  }
+</style>

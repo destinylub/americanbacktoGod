@@ -1,0 +1,43 @@
+---
+// Responsive image: AVIF, then WebP, with explicit width and height to prevent layout shift.
+// Lazy by default. Pass loading="eager" and priority only for the hero image.
+import { getImage, imageUrl, srcset } from '../lib/images';
+
+interface Props {
+  id: string;
+  sizes: string;
+  /** Overrides the registered alt text. Use "" only for purely decorative images. */
+  alt?: string;
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  /** CSS aspect-ratio such as "4 / 5". The image is cropped with object-fit: cover. */
+  ratio?: string;
+  /** CSS object-position for the crop, e.g. "50% 20%". */
+  position?: string;
+  class?: string;
+}
+
+const { id, sizes, alt, loading = 'lazy', priority = false, ratio, position, class: className } = Astro.props;
+const img = getImage(id);
+// Fallback src: the variant closest to 800px wide.
+const fallbackWidth = img.widths.reduce((a, b) => (Math.abs(b - 800) < Math.abs(a - 800) ? b : a));
+const style = [ratio && `aspect-ratio:${ratio}`, ratio && 'object-fit:cover', position && `object-position:${position}`]
+  .filter(Boolean)
+  .join(';');
+---
+
+<picture>
+  <source type="image/avif" srcset={srcset(img, 'avif')} sizes={sizes} />
+  <source type="image/webp" srcset={srcset(img, 'webp')} sizes={sizes} />
+  <img
+    src={imageUrl(id, fallbackWidth, 'webp')}
+    width={img.width}
+    height={img.height}
+    alt={alt ?? img.alt}
+    loading={loading}
+    decoding={priority ? 'sync' : 'async'}
+    fetchpriority={priority ? 'high' : undefined}
+    class={className}
+    style={style || undefined}
+  />
+</picture>

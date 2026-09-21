@@ -1,0 +1,83 @@
+---
+// Inline line-art icons. Lucide (ISC licence) supplies most paths; the three social marks are drawn
+// here because Lucide no longer ships brand icons. All icons share one stroke width.
+import arrowRight from 'lucide-static/icons/arrow-right.svg?raw';
+import bookOpen from 'lucide-static/icons/book-open.svg?raw';
+import calendar from 'lucide-static/icons/calendar.svg?raw';
+import chevronDown from 'lucide-static/icons/chevron-down.svg?raw';
+import chevronLeft from 'lucide-static/icons/chevron-left.svg?raw';
+import chevronRight from 'lucide-static/icons/chevron-right.svg?raw';
+import clock from 'lucide-static/icons/clock.svg?raw';
+import externalLink from 'lucide-static/icons/external-link.svg?raw';
+import handHeart from 'lucide-static/icons/hand-heart.svg?raw';
+import heartHandshake from 'lucide-static/icons/heart-handshake.svg?raw';
+import mail from 'lucide-static/icons/mail.svg?raw';
+import mapPin from 'lucide-static/icons/map-pin.svg?raw';
+import megaphone from 'lucide-static/icons/megaphone.svg?raw';
+import menu from 'lucide-static/icons/menu.svg?raw';
+import messagesSquare from 'lucide-static/icons/messages-square.svg?raw';
+import phone from 'lucide-static/icons/phone.svg?raw';
+import share2 from 'lucide-static/icons/share-2.svg?raw';
+import star from 'lucide-static/icons/star.svg?raw';
+import users from 'lucide-static/icons/users.svg?raw';
+import x from 'lucide-static/icons/x.svg?raw';
+
+interface Props {
+  name: keyof typeof icons;
+  class?: string;
+  /** Provide a label only when the icon stands alone; otherwise it is hidden from assistive tech. */
+  label?: string;
+}
+
+const custom = {
+  facebook: '<path d="M14 8.5V7c0-.8.5-1.2 1.3-1.2H17V3h-2.4C12.1 3 10.5 4.6 10.5 7v1.5H8V11.5h2.5V21H14v-9.5h2.6l.4-3H14z" />',
+  instagram:
+    '<rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" />',
+  youtube:
+    '<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8z" /><path d="m10 15 5-3-5-3z" />',
+};
+
+// Strip the wrapper <svg> from a Lucide file and keep only its shapes.
+const inner = (raw: string) => raw.slice(raw.indexOf('>', raw.indexOf('<svg')) + 1, raw.lastIndexOf('</svg>')).trim();
+
+const icons = {
+  'arrow-right': inner(arrowRight),
+  'book-open': inner(bookOpen),
+  calendar: inner(calendar),
+  'chevron-down': inner(chevronDown),
+  'chevron-left': inner(chevronLeft),
+  'chevron-right': inner(chevronRight),
+  clock: inner(clock),
+  'external-link': inner(externalLink),
+  'hand-heart': inner(handHeart),
+  'heart-handshake': inner(heartHandshake),
+  mail: inner(mail),
+  'map-pin': inner(mapPin),
+  megaphone: inner(megaphone),
+  menu: inner(menu),
+  'messages-square': inner(messagesSquare),
+  phone: inner(phone),
+  'share-2': inner(share2),
+  star: inner(star),
+  users: inner(users),
+  x: inner(x),
+  ...custom,
+};
+
+const { name, class: className, label } = Astro.props;
+---
+
+<svg
+  class:list={['icon', className]}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+  set:html={icons[name]}
+/>

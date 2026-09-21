@@ -1,0 +1,56 @@
+---
+// Numbered section opener: a large number on a dotted rule, then the heading. The dotted rule is the
+// "path" motif that runs through the site.
+interface Props {
+  number: string;
+  title: string;
+  eyebrow?: string;
+  id?: string;
+}
+const { number, title, eyebrow, id } = Astro.props;
+---
+
+<header class="section-heading">
+  <div class="section-heading__path" aria-hidden="true">
+    <span class="section-heading__num">{number}</span>
+    <span class="section-heading__dots"></span>
+  </div>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h2 id={id}>{title}</h2>
+  <slot />
+</header>
+
+<style>
+  .section-heading {
+    max-width: 48rem;
+    margin-bottom: var(--space-7);
+  }
+  .section-heading__path {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  .section-heading__num {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--red-600);
+  }
+  :global(.on-dark) .section-heading__num {
+    color: var(--red-300);
+  }
+  .section-heading__dots {
+    flex: 1;
+    max-width: 8rem;
+    border-top: 3px dotted var(--navy-300);
+  }
+  :global(.on-dark) .section-heading__dots {
+    border-top-color: rgb(255 255 255 / 0.4);
+  }
+  .section-heading > :global(:last-child) {
+    margin-bottom: 0;
+  }
+</style>

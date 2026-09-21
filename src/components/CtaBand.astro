@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+import NextMeeting from './NextMeeting.astro';
+---
+
+<section class="cta on-dark" aria-labelledby="cta-title">
+  <div class="container cta__inner">
+    <span class="cta__star" aria-hidden="true"><Icon name="star" /></span>
+    <p class="eyebrow">Join us</p>
+    <h2 id="cta-title">Come, let's unite in prayer for America Back to God</h2>
+    <p class="cta__lead">
+      We meet to pray for our nation on the first Friday of every month. The next meeting is
+      <strong><NextMeeting /></strong>.
+    </p>
+    <div class="cta__actions">
+      <a class="btn btn--light" href="/events/monthly-prayer-meeting/">
+        See meeting details
+        <Icon name="arrow-right" />
+      </a>
+      <a class="btn btn--outline-light" href="/contact-us/">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: var(--navy-600);
+    padding-block: var(--section-y);
+    text-align: center;
+  }
+  .cta__inner {
+    max-width: 52rem;
+  }
+  .cta__star {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 0 auto var(--space-5);
+    border: 2px solid var(--red-300);
+    border-radius: 50%;
+    color: var(--red-300);
+  }
+  .cta__star :global(.icon) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .cta h2 {
+    font-size: var(--step-4);
+  }
+  .cta__lead {
+    max-width: 38rem;
+    margin: 0 auto var(--space-6);
+    font-size: var(--step-1);
+    color: var(--white);
+  }
+  .cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+</style>

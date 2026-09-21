@@ -1,0 +1,41 @@
+---
+// Dark header band for inner pages: one h1, an optional eyebrow and lead sentence.
+interface Props {
+  title: string;
+  eyebrow?: string;
+}
+const { title, eyebrow } = Astro.props;
+---
+
+<section class="page-hero on-dark">
+  <div class="container page-hero__inner">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    <div class="page-hero__lead"><slot /></div>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    padding-block: clamp(3rem, 2rem + 5vw, 6rem);
+    border-bottom: 4px solid var(--red-600);
+  }
+  h1 {
+    max-width: 18ch;
+    margin-bottom: var(--space-4);
+    font-size: var(--step-5);
+    animation: rise-in 0.7s var(--ease) both;
+  }
+  .page-hero__lead {
+    max-width: 40rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--navy-100);
+  }
+  .page-hero__lead :global(:last-child) {
+    margin-bottom: 0;
+  }
+  .page-hero__lead:empty {
+    display: none;
+  }
+</style>
