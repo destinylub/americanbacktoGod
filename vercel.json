@@ -1,0 +1,48 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/event/8th-annual-prayer-conference", "destination": "/events/8th-annual-prayer-conference/", "permanent": true },
+    { "source": "/event/8th-annual-prayer-conference/", "destination": "/events/8th-annual-prayer-conference/", "permanent": true },
+    { "source": "/event/prayer-conference", "destination": "/events/prayer-conference-2023/", "permanent": true },
+    { "source": "/event/prayer-conference/", "destination": "/events/prayer-conference-2023/", "permanent": true },
+    { "source": "/event/join-us-every-1st-friday-of-the-month", "destination": "/events/monthly-prayer-meeting/", "permanent": true },
+    { "source": "/event/join-us-every-1st-friday-of-the-month/", "destination": "/events/monthly-prayer-meeting/", "permanent": true },
+    { "source": "/donation-confirmation", "destination": "/donate/", "permanent": true },
+    { "source": "/donation-confirmation/", "destination": "/donate/", "permanent": true },
+    { "source": "/donation-failed", "destination": "/donate/", "permanent": true },
+    { "source": "/donation-failed/", "destination": "/donate/", "permanent": true },
+    { "source": "/donor-dashboard", "destination": "/donate/", "permanent": true },
+    { "source": "/donor-dashboard/", "destination": "/donate/", "permanent": true },
+    { "source": "/donations/donation-form", "destination": "/donate/", "permanent": true },
+    { "source": "/donations/donation-form/", "destination": "/donate/", "permanent": true },
+    { "source": "/sample-page", "destination": "/", "permanent": true },
+    { "source": "/sample-page/", "destination": "/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-src https://docs.google.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}
