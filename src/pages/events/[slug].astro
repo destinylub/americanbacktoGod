@@ -53,7 +53,7 @@ const jsonLd = [
     {event.tagline && <p>{event.tagline}</p>}
   </PageHero>
 
-  <section class="section" aria-label="Event details">
+  <section class="section" data-reveal aria-label="Event details">
     <div class="container split split--wide-left">
       <div>
         <p class="back">
@@ -145,7 +145,7 @@ const jsonLd = [
   </section>
 
   {event.scripture && (
-    <section class="verse on-dark" aria-label="Scripture">
+    <section class="verse on-dark" data-reveal aria-label="Scripture">
       <div class="container container--narrow">
         <Scripture dark />
       </div>

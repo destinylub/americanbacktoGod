@@ -18,7 +18,7 @@ const past = getPast();
     <p>Our monthly prayer meeting and annual prayer conferences.</p>
   </PageHero>
 
-  <section class="section" aria-labelledby="upcoming-title">
+  <section class="section" data-reveal aria-labelledby="upcoming-title">
     <div class="container">
       <SectionHeading number="01" eyebrow="Coming up" id="upcoming-title" title="Upcoming events" />
       {upcoming.length > 0 ? (
@@ -32,7 +32,7 @@ const past = getPast();
   </section>
 
   {past.length > 0 && (
-    <section class="section section--paper-deep" aria-labelledby="past-title">
+    <section class="section section--paper-deep" data-reveal aria-labelledby="past-title">
       <div class="container">
         <SectionHeading number="02" eyebrow="Looking back" id="past-title" title="Past events" />
         <div class="event-list event-list--two">

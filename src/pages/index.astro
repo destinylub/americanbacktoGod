@@ -103,7 +103,7 @@ const jsonLd = [
 
   <div class="journey">
     <!-- 01 Mission -->
-    <section class="section" aria-labelledby="mission-title">
+    <section class="section" data-reveal aria-labelledby="mission-title">
       <div class="container mission">
         <div class="mission__text">
           <SectionHeading
@@ -141,7 +141,7 @@ const jsonLd = [
     </section>
 
     <!-- 02 Approach -->
-    <section class="section section--paper-deep" aria-labelledby="approach-title">
+    <section class="section section--paper-deep" data-reveal aria-labelledby="approach-title">
       <div class="container">
         <SectionHeading number="02" eyebrow="Our approach" id="approach-title" title="To achieve our goals, we will" />
         <ul class="card-grid" role="list">
@@ -163,7 +163,7 @@ const jsonLd = [
     </section>
 
     <!-- 03 Events -->
-    <section class="section" aria-labelledby="events-title">
+    <section class="section" data-reveal aria-labelledby="events-title">
       <div class="container">
         <SectionHeading number="03" eyebrow="Events" id="events-title" title="Gather with us in prayer" />
         {upcoming.length > 0 ? (
@@ -188,14 +188,14 @@ const jsonLd = [
     </section>
 
     <!-- Scripture -->
-    <section class="verse on-dark" aria-label="Scripture">
+    <section class="verse on-dark" data-reveal aria-label="Scripture">
       <div class="container container--narrow">
         <Scripture dark />
       </div>
     </section>
 
     <!-- 04 Gallery -->
-    <section class="section" aria-labelledby="gallery-title">
+    <section class="section" data-reveal aria-labelledby="gallery-title">
       <div class="container">
         <SectionHeading number="04" eyebrow="From the gallery" id="gallery-title" title="Moments from our gatherings" />
         <Gallery pick={galleryPicks} filters={false} />
@@ -206,7 +206,7 @@ const jsonLd = [
     </section>
 
     <!-- 05 Get involved -->
-    <section class="section section--paper-deep" aria-labelledby="involved-title">
+    <section class="section section--paper-deep" data-reveal aria-labelledby="involved-title">
       <div class="container">
         <SectionHeading
           number="05"

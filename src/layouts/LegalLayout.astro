@@ -16,7 +16,7 @@ const { title, description } = Astro.props;
   <PageHero title={title} eyebrow="Legal">
     <p>Last updated: <time datetime={site.legalUpdated}>{formatDate(site.legalUpdated)}</time></p>
   </PageHero>
-  <section class="section">
+  <section class="section" data-reveal>
     <div class="container container--narrow">
       <article class="prose legal">
         <slot />

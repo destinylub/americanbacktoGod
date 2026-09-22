@@ -74,6 +74,36 @@ const fullTitle = title === site.name ? title : `${title} | ${site.name}`;
     <!-- Marks the page as script-enabled so menus can collapse; without it they stay expanded. -->
     <script is:inline>document.documentElement.classList.add('js');</script>
 
+    <!--
+      Section entrance: each [data-reveal] section blurs and rises into place the first time it
+      scrolls into view. Skipped entirely under prefers-reduced-motion, where sections are simply
+      visible (see the media query in base.css); every section still gets is-revealed so nothing
+      depends on the observer running.
+    -->
+    <script is:inline>
+      // Runs on DOMContentLoaded: this script sits in <head>, before the sections it queries exist.
+      document.addEventListener('DOMContentLoaded', function () {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var els = document.querySelectorAll('[data-reveal]');
+        if (reduce || !('IntersectionObserver' in window)) {
+          els.forEach(function (el) { el.classList.add('is-revealed'); });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+        );
+        els.forEach(function (el) { io.observe(el); });
+      });
+    </script>
+
     {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
   </head>
   <body>
