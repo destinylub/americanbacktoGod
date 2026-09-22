@@ -8,7 +8,7 @@ import sharp from 'sharp';
 const root = path.resolve(import.meta.dirname, '..');
 const registry = JSON.parse(fs.readFileSync(path.join(root, 'src/data/images.json'), 'utf8'));
 const outDir = path.join(root, 'public/images');
-const DEFAULT_WIDTHS = [400, 800, 1200, 1600];
+const DEFAULT_WIDTHS = [360, 540, 800, 1200, 1600];
 
 fs.mkdirSync(outDir, { recursive: true });
 const manifestPath = path.join(root, 'src/data/images.generated.json');
