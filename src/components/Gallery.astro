@@ -46,7 +46,7 @@ if (limit) photos = photos.slice(0, limit);
 
   <ul class:list={['gallery__grid', !filters && 'gallery__grid--preview']} role="list">
     {
-      photos.map((p) => (
+      photos.map((p, i) => (
         <li class="gallery__item" data-group={p.group}>
           <a
             href={filters ? p.full : '/gallery/'}
@@ -61,7 +61,8 @@ if (limit) photos = photos.slice(0, limit);
           >
             <Picture
               id={p.image}
-              sizes="(min-width: 64rem) 22rem, (min-width: 40rem) 33vw, 90vw"
+              sizes="(min-width: 75rem) 24rem, (min-width: 48rem) 33vw, 46vw"
+              loading={filters && i < 4 ? 'eager' : 'lazy'}
               ratio={p.portrait ? '3 / 4' : '4 / 3'}
             />
             <span class="sr-only">{filters ? 'View larger' : 'View in the gallery'}</span>
