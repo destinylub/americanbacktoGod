@@ -78,7 +78,7 @@ const check = (name, ok, detail = '') => results.interaction.push(`${ok ? 'PASS'
   await page.keyboard.press('Escape');
   check('Escape closes dropdown and keeps focus on its button', (await toggle.getAttribute('aria-expanded')) === 'false' && (await page.evaluate(() => document.activeElement?.classList.contains('sub-toggle'))));
   const heroImg = page.locator('.hero__media img');
-  check('Hero image is eager and high priority', (await heroImg.getAttribute('loading')) === 'eager' && (await heroImg.getAttribute('fetchpriority')) === 'high');
+  check('Hero image is not lazy-loaded and has explicit size attributes', (await heroImg.getAttribute('loading')) === 'eager' && !!(await heroImg.getAttribute('width')) && !!(await heroImg.getAttribute('height')));
   await context.close();
 }
 {
@@ -134,6 +134,26 @@ const check = (name, ok, detail = '') => results.interaction.push(`${ok ? 'PASS'
   check('Upcoming section holds the monthly prayer meeting', upcoming.length === 1 && /Monthly/.test(upcoming[0]), upcoming.join(', '));
   check('Past section holds both conferences', past.length === 2, past.join(', '));
   await context.close();
+}
+{
+  // The page was built on one date but is viewed later: the next-meeting date must correct itself in the browser.
+  // (October 2, 2026 is the first Friday; the meeting ends at 8:30 PM Eastern.)
+  const cases = [
+    ['2026-11-20T12:00:00-05:00', 'Friday, December 4, 2026', 'a visit after the November meeting shows December'],
+    ['2026-10-02T19:00:00-04:00', 'Friday, October 2, 2026', 'on meeting night before it ends, still shows tonight'],
+    ['2026-10-02T21:00:00-04:00', 'Friday, November 6, 2026', 'on meeting night after it ends, shows the next meeting'],
+    ['2026-09-25T12:00:00-04:00', 'Friday, October 2, 2026', 'a normal visit before the meeting shows October 2'],
+  ];
+  for (const [when, expected, label] of cases) {
+    const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+    const page = await context.newPage();
+    await page.clock.install({ time: new Date(when) });
+    await page.goto(base + '/', { waitUntil: 'load' });
+    await page.waitForTimeout(300);
+    const shown = await page.locator('.hero__facts time').textContent();
+    check('Next-meeting date: ' + label, shown === expected, shown ?? '');
+    await context.close();
+  }
 }
 {
   // Old WordPress URLs redirect
