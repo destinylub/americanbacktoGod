@@ -191,6 +191,6 @@ Reports are written to `audit-output/`, which is not committed.
 - **Founder video captions:** the two videos have no captions yet.
 - **Own photographs:** the stock photographs on the old site were left out. Replace or add photos through the gallery steps above.
 - **Logo:** only a raster logo (409 px) exists. The favicon is a simplified drawing of the logo in `scripts/build-favicons.mjs`. Replace it when a vector logo is supplied.
-- **Facebook and YouTube links:** they point to the founder's personal profile and channel, as on the previous site.
+- **Social links:** the Facebook and YouTube links point to the founder's personal profile and channel, as on the previous site. The YouTube address (`@veronicamagembe6191`) currently returns a 404, so the channel may have been renamed or removed. Update it in `src/data/site.json` (`social.youtube`). `npm run links` reports it until it is fixed.
 - **Analytics:** none is installed. The Privacy Policy says so. Update it before adding any.
 - **Legal review:** see the notice at the top of this file.
