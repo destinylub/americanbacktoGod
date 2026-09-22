@@ -103,7 +103,7 @@ const socials = [
   }
   @media (min-width: 64rem) {
     .site-footer__grid {
-      grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+      grid-template-columns: 1.4fr 0.9fr 1fr 1.7fr;
     }
   }
   .site-footer__logo {
@@ -117,6 +117,9 @@ const socials = [
     font-weight: 600;
     line-height: 1.15;
     text-decoration: none;
+  }
+  .site-footer__logo :global(picture) {
+    flex: none;
   }
   .site-footer__logo :global(.site-footer__logo-img) {
     width: 4.5rem;
@@ -158,6 +161,9 @@ const socials = [
     display: flex;
     align-items: center;
     gap: var(--space-3);
+  }
+  .site-footer__contact a {
+    min-width: 0;
   }
   .site-footer__contact {
     margin-bottom: var(--space-5);

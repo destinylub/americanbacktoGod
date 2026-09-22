@@ -66,7 +66,7 @@ import site from '../data/site.json';
 
 <style>
   .details {
-    padding: var(--space-6);
+    padding: var(--space-5);
     background: var(--surface);
     border: 1px solid var(--rule);
     border-top: 4px solid var(--red-600);
@@ -86,8 +86,11 @@ import site from '../data/site.json';
   }
   .details__list li {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--space-3);
     margin-bottom: var(--space-4);
+  }
+  .details__list li > div {
+    min-width: 0;
   }
   .details__list :global(.icon) {
     margin-top: 0.25em;

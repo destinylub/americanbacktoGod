@@ -55,7 +55,6 @@ h4 { font-size: var(--step-1); }
 
 p {
   margin: 0 0 var(--space-4);
-  text-wrap: pretty;
 }
 
 ul,
@@ -76,7 +75,7 @@ a:hover {
 
 /* Long addresses such as the mission email must wrap instead of forcing the page wider than the screen */
 a[href^='mailto:'] {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 :focus-visible {
