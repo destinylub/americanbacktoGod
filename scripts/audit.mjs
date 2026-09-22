@@ -113,12 +113,13 @@ const check = (name, ok, detail = '') => results.interaction.push(`${ok ? 'PASS'
   await page.keyboard.press('Enter');
   const dialog = page.locator('dialog[open]');
   check('Lightbox opens with Enter', await dialog.isVisible());
-  const cap1 = await page.locator('[data-lb-caption]').textContent();
+  const src1 = await page.locator('[data-lb-img]').getAttribute('src');
   await page.keyboard.press('ArrowRight');
-  const cap2 = await page.locator('[data-lb-caption]').textContent();
-  check('Arrow Right shows the next photo', cap1 !== cap2 && /2 of 36/.test(cap2 ?? ''), cap2?.slice(-24));
+  const src2 = await page.locator('[data-lb-img]').getAttribute('src');
+  check('Arrow Right shows the next photo', src1 !== src2, src2 ?? '');
   await page.keyboard.press('ArrowLeft');
-  check('Arrow Left goes back', /1 of 36/.test((await page.locator('[data-lb-caption]').textContent()) ?? ''));
+  const src3 = await page.locator('[data-lb-img]').getAttribute('src');
+  check('Arrow Left goes back', src3 === src1, src3 ?? '');
   await page.keyboard.press('Escape');
   check('Escape closes lightbox', !(await dialog.count()));
   check('Focus returns to the photo that opened it', await first.evaluate((el) => el === document.activeElement));

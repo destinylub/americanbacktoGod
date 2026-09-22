@@ -30,7 +30,6 @@ const all = gallery.photos.map((p) => {
   };
 });
 
-const groupLabel = Object.fromEntries(gallery.groups.map((g) => [g.id, g.label]));
 let photos = pick ? pick.map((id) => all.find((p) => p.image === id)!).filter(Boolean) : all;
 if (limit) photos = photos.slice(0, limit);
 ---
@@ -61,7 +60,6 @@ if (limit) photos = photos.slice(0, limit);
             data-width={p.img.width}
             data-height={p.img.height}
             data-alt={p.img.alt}
-            data-group-label={groupLabel[p.group]}
           >
             <Picture
               id={p.image}
@@ -98,7 +96,6 @@ if (limit) photos = photos.slice(0, limit);
             <span class="sr-only">Next photo</span>
           </button>
           <img class="lightbox__img" alt="" width="1200" height="800" data-lb-img />
-          <p class="lightbox__caption" data-lb-caption></p>
         </div>
       </dialog>
     )
@@ -243,10 +240,9 @@ if (limit) photos = photos.slice(0, limit);
   .lightbox__frame {
     position: relative;
     display: grid;
-    grid-template-rows: 1fr auto;
     justify-items: center;
     height: 100%;
-    padding: var(--space-8) var(--space-4) var(--space-4);
+    padding: var(--space-8) var(--space-4);
   }
   .lightbox__img {
     align-self: center;
@@ -256,13 +252,6 @@ if (limit) photos = photos.slice(0, limit);
     height: auto;
     min-height: 0;
     object-fit: contain;
-  }
-  .lightbox__caption {
-    max-width: 44rem;
-    margin: var(--space-4) 0 0;
-    text-align: center;
-    font-size: var(--step--1);
-    color: var(--navy-100);
   }
   .lightbox__btn {
     position: absolute;
@@ -335,7 +324,6 @@ if (limit) photos = photos.slice(0, limit);
 
     if (!dialog) continue;
     const img = dialog.querySelector<HTMLImageElement>('[data-lb-img]')!;
-    const caption = dialog.querySelector<HTMLElement>('[data-lb-caption]')!;
     let visible: HTMLAnchorElement[] = [];
     let index = 0;
 
@@ -345,8 +333,8 @@ if (limit) photos = photos.slice(0, limit);
       img.src = link.dataset.full!;
       img.width = Number(link.dataset.width);
       img.height = Number(link.dataset.height);
+      // The alt text still describes the photo for screen readers, even though no caption is shown.
       img.alt = link.dataset.alt ?? '';
-      caption.textContent = `${link.dataset.alt}  (${index + 1} of ${visible.length}, ${link.dataset.groupLabel})`;
     };
 
     for (const link of links) {
