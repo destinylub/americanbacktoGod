@@ -1,20 +1,24 @@
 ---
-// Photo grid. With filters it also runs the lightbox and the All / 2023 Conference / 2022 filter buttons.
-// Without JavaScript every photo is a plain link to the large image and the filter buttons are hidden.
+// Photo grid with a keyboard-accessible lightbox. Filters (All / 2023 Conference / 2022) are optional
+// and independent of the lightbox, so the curated home page picks can open the viewer without showing
+// filter chrome. Without JavaScript every photo is a plain link to the large image.
 import Picture from './Picture.astro';
 import Icon from './Icon.astro';
 import gallery from '../data/gallery.json';
 import { getImage, imageUrl } from '../lib/images';
 
 interface Props {
-  /** Show only the first N photos and skip filters and lightbox chrome (used on the home page). */
+  /** Show only the first N photos (used on the home page). */
   limit?: number;
+  /** Show the All / 2023 Conference / 2022 filter buttons. */
   filters?: boolean;
+  /** Open photos in the in-page viewer instead of linking away. */
+  lightbox?: boolean;
   /** Specific image ids to feature, in order (used on the home page). */
   pick?: string[];
 }
 
-const { limit, filters = true, pick } = Astro.props;
+const { limit, filters = true, lightbox = true, pick } = Astro.props;
 
 const all = gallery.photos.map((p) => {
   const img = getImage(p.image);
@@ -49,9 +53,9 @@ if (limit) photos = photos.slice(0, limit);
       photos.map((p, i) => (
         <li class="gallery__item" data-group={p.group}>
           <a
-            href={filters ? p.full : '/gallery/'}
+            href={lightbox ? p.full : '/gallery/'}
             class="gallery__link"
-            aria-haspopup={filters ? 'dialog' : undefined}
+            aria-haspopup={lightbox ? 'dialog' : undefined}
             data-lightbox-item
             data-full={p.full}
             data-width={p.img.width}
@@ -62,10 +66,15 @@ if (limit) photos = photos.slice(0, limit);
             <Picture
               id={p.image}
               sizes="(min-width: 75rem) 24rem, (min-width: 48rem) 33vw, 46vw"
-              loading={filters && i < 4 ? 'eager' : 'lazy'}
+              loading={i < 4 ? 'eager' : 'lazy'}
               ratio={p.portrait ? '3 / 4' : '4 / 3'}
             />
-            <span class="sr-only">{filters ? 'View larger' : 'View in the gallery'}</span>
+            {lightbox && (
+              <span class="gallery__overlay" aria-hidden="true">
+                <Icon name="zoom-in" class="gallery__overlay-icon" />
+              </span>
+            )}
+            <span class="sr-only">{lightbox ? 'View larger' : 'View in the gallery'}</span>
           </a>
         </li>
       ))
@@ -73,7 +82,7 @@ if (limit) photos = photos.slice(0, limit);
   </ul>
 
   {
-    filters && (
+    lightbox && (
       <dialog class="lightbox" aria-label="Photo viewer" data-lightbox>
         <div class="lightbox__frame">
           <button type="button" class="lightbox__btn lightbox__close" data-lb-close>
@@ -177,6 +186,41 @@ if (limit) photos = photos.slice(0, limit);
   }
   .gallery__link:hover :global(img) {
     transform: scale(1.03);
+  }
+
+  /* Hover/focus affordance so a photo visibly reads as clickable before the viewer opens */
+  .gallery__overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgb(23 23 46 / 0);
+    opacity: 0;
+    transition:
+      opacity 0.25s var(--ease),
+      background-color 0.25s var(--ease);
+  }
+  .gallery__link:hover .gallery__overlay,
+  .gallery__link:focus-visible .gallery__overlay {
+    opacity: 1;
+    background: rgb(23 23 46 / 0.35);
+  }
+  .gallery__overlay :global(.gallery__overlay-icon) {
+    width: 2rem;
+    height: 2rem;
+    color: var(--white);
+    transform: scale(0.8);
+    transition: transform 0.25s var(--ease);
+  }
+  .gallery__link:hover .gallery__overlay :global(.gallery__overlay-icon),
+  .gallery__link:focus-visible .gallery__overlay :global(.gallery__overlay-icon) {
+    transform: scale(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gallery__overlay,
+    .gallery__overlay :global(.gallery__overlay-icon) {
+      transition: none;
+    }
   }
 
   .lightbox {
