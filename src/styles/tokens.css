@@ -24,6 +24,19 @@
   font-display: swap;
 }
 
+/* Fallbacks sized to match the web fonts (measured: Fraunces is about 6% narrower than Georgia,
+   Source Sans 3 about 7% narrower than Arial), so text does not reflow when the fonts arrive. */
+@font-face {
+  font-family: "Fraunces Fallback";
+  src: local("Georgia");
+  size-adjust: 94%;
+}
+@font-face {
+  font-family: "Source Sans 3 Fallback";
+  src: local("Arial");
+  size-adjust: 93%;
+}
+
 :root {
   /* Brand navy and its scale */
   --navy-950: #17172e;
@@ -60,8 +73,8 @@
   --focus: var(--navy-600);
 
   /* Type families */
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --font-display: "Fraunces", "Fraunces Fallback", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", "Source Sans 3 Fallback", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
 
   /* Fluid type scale, about 1.25 on phones rising to 1.33 on desktop */
   --step--1: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);

@@ -7,4 +7,6 @@ const site = process.env.SITE_URL || 'https://americabacktogodmission.com';
 export default defineConfig({
   site,
   trailingSlash: 'always',
+  // The whole stylesheet is about 20 KB, so inlining it removes a render-blocking request.
+  build: { inlineStylesheets: 'always' },
 });

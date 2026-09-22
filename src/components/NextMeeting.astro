@@ -23,19 +23,24 @@ const next = getUpcoming().find((o) => o.isRecurring);
 <script>
   import { firstFriday, formatLongDate, todayInZone, zonedToUtc } from '../lib/dates';
 
-  for (const el of document.querySelectorAll<HTMLTimeElement>('time[data-next-meeting]')) {
-    const tz = el.dataset.timezone!;
-    const endTime = el.dataset.endTime!;
+  // Every date on the page is the same meeting, so work it out once. When the date built into the page is
+  // still in the future (the normal case) there is nothing to change and the script does almost no work.
+  const els = Array.from(document.querySelectorAll<HTMLTimeElement>('time[data-next-meeting]'));
+  if (els.length) {
+    const { timezone: tz, endTime } = els[0].dataset as { timezone: string; endTime: string };
     const now = new Date();
-    const [y, m] = todayInZone(now, tz).split('-').map(Number);
-    for (let i = 0; i < 4; i++) {
-      const date = firstFriday(y + Math.floor((m - 1 + i) / 12), ((m - 1 + i) % 12) + 1);
-      if (zonedToUtc(date, endTime, tz) >= now) {
-        if (el.dateTime !== date) {
-          el.dateTime = date;
-          el.textContent = formatLongDate(date);
+    const today = todayInZone(now, tz);
+    if (els[0].dateTime <= today) {
+      const [y, m] = today.split('-').map(Number);
+      for (let i = 0; i < 4; i++) {
+        const date = firstFriday(y + Math.floor((m - 1 + i) / 12), ((m - 1 + i) % 12) + 1);
+        if (zonedToUtc(date, endTime, tz) >= now) {
+          for (const el of els) {
+            el.dateTime = date;
+            el.textContent = formatLongDate(date);
+          }
+          break;
         }
-        break;
       }
     }
   }

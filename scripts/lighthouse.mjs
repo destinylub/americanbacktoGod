@@ -1,9 +1,15 @@
 // Runs Lighthouse against key pages (mobile and desktop) on the built site.
 //   node scripts/lighthouse.mjs
+// Options (environment variables):
+//   LH_FORMS=mobile            run only one device type (mobile or desktop)
+//   LH_CPU_SLOWDOWN=2          override mobile CPU throttling. Lighthouse assumes a host CPU benchmark of about
+//                              1000 or more at the default 4x. On a slower or busy machine, scale this down and
+//                              check the printed benchmarkIndex, or use PageSpeed Insights on the live site.
 import fs from 'node:fs';
 import path from 'node:path';
 import { launch } from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import desktopConfig from 'lighthouse/core/config/desktop-config.js';
 import { startServer } from './serve.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -22,15 +28,15 @@ const server = await startServer(PORT);
 const pages = ['/', '/about-us/', '/events/', '/events/monthly-prayer-meeting/', '/gallery/', '/contact-us/', '/privacy-policy/'];
 
 const rows = [];
-for (const form of ['mobile', 'desktop']) {
+const forms = (process.env.LH_FORMS ?? 'mobile,desktop').split(',');
+let benchmark = 0;
+for (const form of forms) {
   for (const p of pages) {
-    const config =
-      form === 'desktop'
-        ? { extends: 'lighthouse:default', settings: { formFactor: 'desktop', screenEmulation: { mobile: false, width: 1350, height: 940, deviceScaleFactor: 1, disabled: false }, throttlingMethod: 'simulate' } }
-        : undefined;
+    const config = form === 'desktop' ? desktopConfig : undefined;
     // A fresh browser per run keeps results independent and avoids dropped connections.
     const chrome = await launch({ chromePath, chromeFlags: ['--headless=new', '--no-sandbox'] });
-    const run = await lighthouse(`http://localhost:${PORT}${p}`, { port: chrome.port, output: 'json', logLevel: 'error' }, config);
+    const run = await lighthouse(`http://localhost:${PORT}${p}`, { port: chrome.port, output: 'json', logLevel: 'error', ...(form === 'mobile' && process.env.LH_CPU_SLOWDOWN ? { throttling: { cpuSlowdownMultiplier: Number(process.env.LH_CPU_SLOWDOWN) } } : {}) }, config);
+    benchmark = run.lhr.environment.benchmarkIndex;
     // On Windows the temp profile can still be locked when Chrome exits. That cleanup failure is harmless.
     try {
       await chrome.kill();
@@ -58,3 +64,5 @@ server.close();
 const table = ['| Device | Page | Perf | A11y | Best | SEO | LCP | CLS | TBT |', '|---|---|---|---|---|---|---|---|---|', ...rows.map((r) => `| ${r.form} | ${r.page} | ${r.performance} | ${r.accessibility} | ${r.bestPractices} | ${r.seo} | ${r.lcp} | ${r.cls} | ${r.tbt} |`)].join('\n');
 fs.writeFileSync(path.join(outDir, 'lighthouse.md'), table + '\n');
 console.log(table);
+console.log(`
+Host CPU benchmarkIndex: ${Math.round(benchmark)} (Lighthouse's default mobile throttling assumes about 1000 or more)`);
