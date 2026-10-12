@@ -57,6 +57,47 @@ const jsonLd = [
         <Picture id="founder-veronica-magembe" sizes="(min-width: 64rem) 26rem, 90vw" ratio="1 / 1" loading="eager" />
       </div>
     </div>
+    <div class="container container--narrow prose founder__bio">
+      <p>
+        Veronica Magembe grew up in Uganda during the years of Idi Amin’s rule, an experience that gave her a lasting
+        appreciation for freedom. After moving to the United States, she returned to school and became a nurse.
+      </p>
+      <p>
+        When the events of September 11, 2001 shook the nation, the Holy Spirit placed a burden on Veronica’s heart to
+        intercede for America. Guided by 2 Chronicles 7:14, she mobilized members of Victory Family Church in Boston,
+        under the leadership of Pastor Samuel Kasozi, together with believers from other churches and communities, to
+        pray for God’s mercy and restoration over the nation. That call to prayer grew into America Back to God, and
+        today she leads the America Back to God Prayer Group, which meets virtually every Monday to intercede for the
+        United States.
+      </p>
+      <aside class="founder__gatherings" aria-label="Prayer meeting schedule">
+        <h2>Join us in prayer</h2>
+        <p>
+          The weekly Monday prayer group meets virtually. Separately, the mission hosts an in-person prayer meeting on
+          the first Friday of each month in Alpharetta. <a href="/contact-us/">Contact us for details about joining the
+          Monday group</a>, or see <a href="/events/monthly-prayer-meeting/">details for the in-person monthly meeting</a>.
+        </p>
+      </aside>
+      <p>
+        An intercessor, worshipper, and evangelist, Veronica’s heart also reaches back to her homeland. In the villages
+        of Uganda, she has led a gospel crusade where many gave their lives to Jesus Christ, and organized outreaches
+        providing families with everyday necessities such as sugar, salt, and soap. Partnering with Christian mothers,
+        she helped rescue two boys from life on the streets; both are now in foster care and attending school. She also
+        pays the school fees for three orphaned children who lost their mother in childbirth and are being raised by
+        their grandmother.
+      </p>
+      <p>Her service is shaped by James 1:27:</p>
+      <blockquote>
+        <p>“Pure religion and undefiled before God and the Father is this, To visit the fatherless and widows in their
+        affliction, and to keep himself unspotted from the world.”</p>
+        <cite>James 1:27</cite>
+      </blockquote>
+      <p>
+        Veronica has been married for over thirty years to Dr. Ronald Magembe. They are blessed with three daughters,
+        Bridget, Ronah, and Angelina, and three grandchildren. After many years in Boston, she now lives in Atlanta,
+        Georgia, where she continues to pray daily for her family, her community, and the nation.
+      </p>
+    </div>
   </section>
 
   <section class="section section--paper-deep" data-reveal aria-labelledby="videos-title">
@@ -91,6 +132,39 @@ const jsonLd = [
   }
   .founder__intro :global(.section-heading h2) {
     font-size: var(--step-4);
+  }
+  .founder__bio {
+    margin-top: var(--space-8);
+  }
+  .founder__gatherings {
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--red-600);
+    border-radius: var(--radius);
+  }
+  .founder__gatherings h2 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--step-1);
+  }
+  .founder__gatherings p {
+    margin: 0;
+  }
+  .founder__bio blockquote {
+    margin: var(--space-5) 0;
+    padding-left: var(--space-5);
+    border-left: 3px solid var(--navy-300);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+  }
+  .founder__bio blockquote p {
+    margin: 0 0 var(--space-2);
+  }
+  .founder__bio cite {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-style: normal;
+    color: var(--text-muted);
   }
   .founder__social {
     display: flex;
